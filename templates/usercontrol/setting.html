@@ -1,0 +1,147 @@
+{% extends "base.html"%}
+{% block title%}
+资料设置
+{%endblock%}
+    <!-- href="/static/style.css" 表示网站根目录下的文件 -->
+    <!-- href="static/style.css" 表示网站当前域名下的文件，比如当前域名是127.0.0.1/test/login/, 网页检索静态文件是的域名将会是127.0.0.1/test/login/static/style.css。所以当要引用根目录下的静态文件时，href前的单斜杠是必须要的 -->
+ {% block stylesheet%}
+<link rel="stylesheet" type="text/css" href="/static/setting.css"/>
+{%endblock%}
+    {%block content%}
+    <div class="setting" id="{{ id }}">
+        <div class="edit">
+        <table>
+            <tbody>
+                <tr>
+                    <td><h2>个人信息</h2></td>
+                </tr>
+                <tr> 
+                    <td class="title">
+                        <em class="sign">*</em>
+                        昵称
+                    </td>
+                    <td><div class="levelone">
+                            <div id="inputBox">
+                                <input class="normalInput" id="nickInput" type="text" name="name" value="{{ name }}" />
+                            </div>
+                            <div id="nickMessageBox" class="noticeBox"></div>
+                            </div>
+                        </td>
+                    </tr>
+                <tr> 
+                    <td class="title">
+                        头像
+                    </td>
+                    <td>
+                    <div class="levelone" style="width: 600px">
+                            <div id="imageBox">
+                                <img class="img" id="headImg" name="head_pic" src="{{ head_pic }}"/>
+                            </div>
+                            <div id="messageBox" style="width: 400px">
+                                <div><label>支持jpg、gif、png的图片，建议小于2M，宽高比为1:1</label></div>
+                            </div>
+                            <div id="fileUpload">
+                                <form enctype="form-data" id="upload" method="post">
+                                    <input type="file" name="fileUpload" id="fileInput" accept="image/png, image/jpeg, image/gif, image/jpg" style="display: none">
+                                    <input type="button" value="更改头像" id="imgChange" onclick="uploadFile('fileInput')" />
+                                </form>
+                            </div>
+                            </div>
+                     </td>
+                </tr>
+                <tr> 
+                    <td class="title">
+                        性别
+                    </td>
+                    <td><div class="levelone">
+                            <input type="radio" name="gender" id="male" value="1" {{ male_checked }}>
+                            <label for="male">男</label>
+                             <input type="radio" name="gender" id="female" value="2" {{ female_checked}}>
+                            <label for="female">女</label>
+                             <input type="radio" name="gender" id="privacy" value="0" {{ privacy_checked }}>
+                            <label for="privacy">保密</label>
+                            </div>
+                        </td>
+                    </tr>
+                 <tr> 
+                    <td class="title">
+                        个人简介
+                    </td>
+                    <td><div class="levelone">
+                            <textarea id="infoTextarea" name="infoText" style="width: 500px;height:100px">{{ desc }}</textarea>
+                            <br/>
+                            <label for="infoText" id="infoLabel" onload="onChangeControl('infoLabel')">用一段话描述自己，字数不能超过100字符</label>
+                        </div>
+                        <div id="infoMessageBox" class="noticeBox"></div>
+                        </td>
+                    </tr>
+                                 <tr> 
+                    <td class="title">
+                        <em class="sign">*</em>
+                        联系邮箱
+                    </td>
+                    <td>
+                        <div class="levelone">
+                            <div id="verificationEmail">
+                                <div style="float: left;" id="settingEmail">{{ settingEmail }}</div>
+                                <p class="pButton" id="sendMail" style="{{ displayStyle }}" onclick="sendEmail()">{{ btnText }}</p>
+                                <p class="pButton" onclick="changeEmail()">修改邮箱</p>
+                                <label id="verificationNote" style="margin-left: 5px"></label>
+                            </div>
+                            <div id="changeEmail" style="display: none">
+                                <input class="normalInput" type="text" name="changeEmail" id="inputChangeEmail"/>
+                                <p class="pButton" onclick="storeChange()">确定</p>
+                                <p class="pButton" onclick="cancelInput()">取消</p>
+                                <label id="leveloneNote"></label>
+                            </div>
+                            <div id="emailMsg" style="width: 100%;color:gray;margin-top:5px">{{ emailMsg }}</div>
+                        </div>
+
+
+                        </td>
+                    </tr>
+                <tr> 
+                    <td class="title">
+                        移动电话
+                    </td>
+                    <td><div class="levelone">
+                            <div id="inputBox">
+                                <input class="normalInput" type="text" name="phone" id="phone" value="{{ phone_num }}"/>
+                            </div>
+                            <div id="phoneMessageBox" class="noticeBox"></div>
+                            </div>
+                        </td>
+                    </tr>
+               <tr> 
+                    <td class="title">
+                        微信
+                    </td>
+                    <td><div class="levelone">
+                            <div id="inputBox">
+                                <input class="normalInput" type="text" name="wechat" id="wechat" value="{{ wechat}}"/>
+                            </div>
+                            <div id="wechatMessageBox" class="noticeBox"></div>
+                            </div>
+                        </td>
+                    </tr>
+               <tr> 
+                    <td class="title">
+                        QQ
+                    </td>
+                    <td><div class="levelone">
+                            <div id="inputBox">
+                                <input class="normalInput" type="text" name="qq" id="qq" value="{{ qq }}" />
+                            </div>
+                            <div id="qqMessageBox" class="noticeBox"></div>
+                            </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="footer">
+            <p class="pButton" style="height: 40px;line-height: 40px" onclick="settingReq()">保存</p>
+        </div>
+    </div>
+{%endblock%}

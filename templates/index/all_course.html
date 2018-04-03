@@ -1,0 +1,52 @@
+{% extends "base.html"%}
+{%block title%}
+所有课程
+{%endblock%}
+    <!-- href="/static/style.css" 表示网站根目录下的文件 -->
+    <!-- href="static/style.css" 表示网站当前域名下的文件，比如当前域名是127.0.0.1/test/login/, 网页检索静态文件是的域名将会是127.0.0.1/test/login/static/style.css。所以当要引用根目录下的静态文件时，href前的单斜杠是必须要的 -->
+{%block content%}
+    <div id="allcontent">
+        <div id="content_center" class="center">
+            <div class="category_container">
+                <div class="category_summary">
+                    <div class="search_navigator">
+                        <a href="/index">首页 </a>
+                        <span> > 所有课程</span>
+                    </div>
+                </div>
+                <div class="inx_course_view">
+                       {% for course in courses %}
+                        <div class="inx_course_item" id="{{ course.id}}">
+                            <a href="/course/{{ course.id }}" target="_blank">
+                            <div style="overflow: hidden;">
+                                <div class="inx_course_pic" >
+                                <img class="inx_img" src="{{ course.item_image }}" width="260px" height="146px"></img></div>
+                            </div>
+                            <div class="course_text_info">
+                                <div class="inx_course_title">{{ course.title }}</div>
+                                <div class="inx_course_user">{{ course.users.name}}</div>
+                            </div>
+                            </a>
+                        </div>
+                        {% endfor%}
+                </div>
+            
+                <div class="pageSelect contentPage">
+                {% if pageseq %}
+                    <a href="#" class="pbtn pnav disabled" id="pageLast">< 上一页</a>
+                    {% for i in pageseq %}
+                        {% if i == 1 %}
+                            <a href="#" class="pbtn pagenum pageSelected">{{ i }}</a>
+                        {% elif i == "..." %}
+                            <a href="#" class="pbtn pagenum disabled">{{ i }}</a>
+                        {% else %}
+                            <a href="#" class="pbtn pagenum">{{ i }}</a>
+                        {% endif %}
+                    {% endfor %}
+                    <a href="#" class="pbtn pnav" id="pageNext">下一页 ></a>
+                {% endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}

@@ -1,0 +1,149 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2018-02-17 22:34:38
+ * @version $Id$
+ */
+html{
+    font-family: '微软雅黑';
+    background-color: gray;
+ }
+/*所有a标签无下划线*/
+a{
+text-decoration:none;
+}
+
+ .setting{
+    width: 1200px;
+    margin:0px auto 0px auto;
+    background-color: white;
+    position: relative;
+    top:60px;
+ }
+ a,button{
+    cursor: pointer;
+ }
+ table{
+    border-collapse:separate;
+    border-spacing:30px;
+ }
+ .edit div {
+    float: left;
+}
+/*类选择器*/
+.title {
+    width: 90px;
+    height: 30px;
+    line-height: 30px;
+    text-align: right;
+    vertical-align: top;
+    color: #666;
+    padding: 0 20px 0 0;
+    font-family: '微软雅黑';
+}
+.sign{
+    color: red;
+}
+.imageBox img{
+    width: 400px;
+    height: 400px；
+}
+/*id选择器*/
+#messageBox{
+    width: 500px;
+    float: left;
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+#fileUpload {
+    float: left;
+    margin-left: 10px;
+    margin-top:10px;
+
+}
+
+#imgChange{
+    background-color: blue;
+    width: 100px;
+    height: 34px;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    border-style: none;
+    cursor: pointer;
+    font-family: '微软雅黑';
+
+}
+#headImg{
+    width: 150px;
+    height: 150px;
+}
+#infoLabel{
+    left: 10px;
+    top: 10px;
+    color: gray;
+
+}
+.levelone{
+    position: relative;
+}
+
+#infoTextarea{
+    line-height: 20px;
+    font-size: 18px;
+}
+/* 联系邮箱信息部分功能按钮*/
+.pButton{
+    width: 100px;
+    height: 34px;
+    line-height: 34px;
+    background-color: blue;
+    color: white;
+    font-size: 15px;
+    border-style: none;
+    text-align: center;
+    margin: 0px 0px 0px 5px;
+    cursor: pointer;
+    float: left;
+}
+#sendMail{
+    width: 130px;
+}
+.normalInput{
+    width: 200px;
+    height: 27px;
+    float: left;
+    line-height: 27px;
+    font-size: 18px
+}
+/* 邮件设置的label框样式*/
+#leveloneNote{
+    color:red;
+    margin-left: 5px
+
+}
+.footer{
+    background-color: #fafafa;
+    height:100px;
+    /* 边界像素、样式、颜色*/
+    border:1px solid #eaeaea;
+    padding:30px 0 0 170px; 
+}
+
+#notice{
+    width: 1000px;
+    height: 200px;
+    margin:0px auto 0px auto;
+    position: relative;
+    background-color: white;
+    padding-top: 60px;
+    top:60px;
+}
+#noticeContent{
+    width: 140px;
+    height: 80px;
+    margin: 0px auto 0px auto;
+}
+

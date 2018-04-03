@@ -1,0 +1,37 @@
+{% extends "base.html"%}
+{%block title%}
+代号011
+{%endblock%}
+    <!-- href="/static/style.css" 表示网站根目录下的文件 -->
+    <!-- href="static/style.css" 表示网站当前域名下的文件，比如当前域名是127.0.0.1/test/login/, 网页检索静态文件是的域名将会是127.0.0.1/test/login/static/style.css。所以当要引用根目录下的静态文件时，href前的单斜杠是必须要的 -->
+{%block content%}
+    <div id="allcontent">
+        <div id="content_center" class="center index">
+            <div class="indexContainer">
+                {% for category in categorys%}
+                <div class="inx_course_view" id="{{category.id}}">
+                    
+                        <div>
+                            <a href="/category/{{ category.id }}" class="category_name">{{category.category_name}}<span class="more">  更多></span></a>
+                        </div>
+                        {% for course in category.courses %}
+                        <div class="inx_course_item" id="{{ course.id}}">
+                            <a href="/course/{{ course.id }}" target="_blank">
+                            <div style="overflow: hidden;">
+                                <div class="inx_course_pic" >
+                                <img class="inx_img" src="{{ course.item_image }}"></img></div>
+                            </div>
+                            <div class="inx_course_title">
+                                {{ course.title }}
+                            </div>
+                            <div class="inx_course_user">{{ course.user.name}}</div>
+                            </a>
+                        </div>
+                        {% endfor%}
+                </div>
+                {% endfor%}
+                <div class="page_select"></div>
+            </div> 
+        </div>
+    </div>
+{%endblock%}

@@ -1,0 +1,114 @@
+{% extends "base.html"%}
+{%block title%}
+资料设置
+{%endblock%}
+    <!-- href="/static/style.css" 表示网站根目录下的文件 -->
+    <!-- href="static/style.css" 表示网站当前域名下的文件，比如当前域名是127.0.0.1/test/login/, 网页检索静态文件是的域名将会是127.0.0.1/test/login/static/style.css。所以当要引用根目录下的静态文件时，href前的单斜杠是必须要的 -->
+{%block stylesheet%}
+<link rel="stylesheet" type="text/css" href=""/>
+{%endblock%}
+{%block content%}
+    <div id="allcontent">
+        <div class="course_manage">
+            <div class="manage_info center">
+                <div class="manage_info_title f_left">我的课程</div>
+                <div class="manage_info_desc f_left">欢迎上传课程与人分享！送人玫瑰，手有余香~</div>
+            </div>
+            <div id="content_center" class="center">
+                    <div class="manage_nav">
+                        <div class="manage_menu">
+                             <ul>
+                                <li class="new_course">新建</li>
+                                <li class="course_audit">提交审核</li>
+                                <li class="course_edit">编辑</li>
+                                <li class="course_delete">删除</li>
+                            </ul>
+                            </div>
+                </div>
+                <div class="course_display">
+                    <div class="course_table">
+                        <table>
+                            <tr class="tr_title">
+                                <th class="td_checkbox"><input type="checkbox" name="all"></th>
+                                <th class="td_title">课程名称</th>
+                                <th class="td_title">预览图片地址</th>
+                                <th class="td_title">创建日期</th>
+                                <th class="td_title">状态</th>
+                                <th class="td_title">创建者</th>
+                            </tr>
+                            {% for course in courses %}
+                            <tr>
+                                <td><input type="checkbox" name="item"></td>
+                                <td><a href="/course/manage/{{ course.id }}"> {{course.title}} </a></td>
+                                <td><span class="pic_url">{{ course.item_image }}</span></td>
+                                <td>{{ course.str_create_date }}</td>
+                                <td> {{course.status}} </td>
+                                <td> {{course.users.name}} </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="low_layer for_close">
+            <div class="course_update">
+                <div class="close close_course_update f_right">X</div>
+                <div class="course_edit">
+                    <div class="op_title">创建课程</div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td class="warn_note warn_course_create"></td>
+                            </tr>
+                            <tr>
+                                <td class="title">课程名称</td>
+                                <td>
+                                <div class="input_area levelone">
+                                    <div class="f_left">
+                                        <input type="text" class="cm_elem c_info" name="course_title">
+                                    </div>
+                                    <div class="warn_note f_left"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="title">预览图</td>
+                                <td>
+                                    <div class="img_area levelone">
+                                        <div class="img_display f_left">
+                                            <img id="headImg">
+                                        </div>
+                                        <div class="img_upload f_left">
+                                            <div>支持640x360 JPG/PNG</div>
+                                            <div class="img_input">
+                                                <form enctype="form-data" id="upload" method="post">
+                                                <input type="file" name="fileUpload" id="fileInput" accept="image/png, image/jpeg, image/jpg" style="display: none">
+                                                <input type="button" value="添加图片" class="imgChange" onclick="uploadFile('fileInput')" />
+                                                </form>
+                                            </div>
+                                            <div class="warn_note"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="title"><div>课程介绍</div></td>
+                                <td>
+                                    <div class="levelone">
+                                        <div><textarea class="course_desc c_info"></textarea><div>
+                                    </div>  
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="couse_update_submit">
+                    <div class="course_btn_submit">确 定</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}

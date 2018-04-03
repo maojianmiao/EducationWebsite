@@ -1,0 +1,115 @@
+{% extends "base.html"%}
+{%block title%}
+课程页{{ course.title }}
+{%endblock%}
+    <!-- href="/static/style.css" 表示网站根目录下的文件 -->
+    <!-- href="static/style.css" 表示网站当前域名下的文件，比如当前域名是127.0.0.1/test/login/, 网页检索静态文件是的域名将会是127.0.0.1/test/login/static/style.css。所以当要引用根目录下的静态文件时，href前的单斜杠是必须要的 -->
+{% block stylesheet %}
+<script type="text/javascript" src="/static/ratylib/jquery.raty.min.js"></script>
+<script type="text/javascript" src="/static/course.js"></script>
+{% endblock %}
+{%block content%}
+    <div id="allcontent">
+        <div id="content_center" class="center course_page">
+            <div class="course_info bgwhite" course_id="{{ course.id }}">
+                <div class="course_img"><img src="{{ course.item_image }}" width="444" height="250"></img></div>
+                <div class="course_info_right">
+                    <div class="course_title"><h2 style="margin-top: 2px;">{{ course.title }}</h2></div>
+                    <div class="course_score">
+                        <div class="views">学习人数: {{ course.view }}</div> 
+                        <div class="my_rate rate_display" score="{{ course.score / 2.0}}"></div>
+                        <div class="score_count">({{ course.score_count }}份评价)</div>
+                        <div>讲师: {{ course.users.name }}</div>
+                    </div>
+
+                </div>
+                <div class="course_collect">
+                    <a href="#" class="btn_add_collect{% if is_collect %} added{% endif %}"> 
+                        {% if is_collect %}已收藏{% else %}添加收藏{% endif %}
+                    </a>
+                </div>
+            </div>
+
+            <div class="course_navigator bgwhite">
+                    <a class="course_nav_item li_catalog course_selected">目录</a>
+                    <a class="course_nav_item li_details">详情</a>
+            </div>
+           
+            <div class="course_main_content">
+                <div id="catalog" class="catalog course_content_left bgwhite" >
+                   <div class="lesson_items">
+                       {% for lesson in lessons %}
+                           <div class="lesson">
+                               <a href="/play/lesson?courseid={{ course.id }}&videoid={{ lesson.id }}" target="_blank">
+                                    <div class="lession_guide">
+                                   <span>课时{{ lesson.order }}</span>
+                                   <span>{{ lesson.title }}</span>
+                                   <span class="lesson_progress">课程时长:{{ lesson.format_duration}}  进度:{{ lesson.progress }}</span>
+                                   </div>
+                               </a>
+                           </div>
+                       {% endfor %}
+                   </div>
+                </div>
+                
+                <div id="course_detail" class="course_detail course_content_left bgwhite" style="display: none">我曾经有一个梦{{ course.description}}</div>
+                <div class="course_rate bgwhite course_content_right">
+                    <div class="course_rate_title">
+                        <div class="user_rate_margin">用户评价</div>
+                    </div>
+                    
+                    {% if not current_user_rate %}
+                    <div class="user_rate_area">
+                        <div class="star_area rate_not_added user_rate_margin">
+                            <div class="rate_title">给课程打分:</div>
+                            <div class="my_rate rate_add rate_add_course"></div>
+                        </div>
+
+                        <div class="comment_text_area rate_remove user_rate_margin">
+                            <textarea class="inputCheck" onkeyup="commentControl(80)"></textarea>
+                        </div>
+                        <div class="course_func rate_remove user_rate_margin">
+                            <label class="commentMsg" style="color: gray">你还可以输入<span id="commentCount" style="color: darkgreen">80</span>字</label>
+                            <div class="comment_submit">添加</div>
+                        </div>
+
+
+                    </div>
+                        {% else %}
+                        <div class="star_area rate_added user_rate_margin" style="height: 50px;">
+                            <div class="rate_title">您已给课程打分:</div>
+                            <div class="my_rate rate_display rate_added " score="{{current_user_rate.score / 2.0 }}"></div>
+                        </div>
+                        {% endif %}
+                    
+                    <div id="commentListId" class="commentList">
+                     <ul id="commentUl">
+                        {% for rate in rates %}
+                        <li>
+                        <div class="commentItem">
+                            <div class="userArea">
+                            <a href="/user/{{ rate.user_id }}" target="_blank"><img class="img" src="{{ rate.users.head_pic }}"></img></a>
+                            <a href="/user/{{ rate.user_id }}" target="_blank" class="nickName">{{ rate.users.name }}</a>
+                            <span>{{ rate.str_create_date }}</span>
+                            </div>
+                            <div class="comment_rate">
+                                <div>评分:</div>
+                                <div class="my_rate rate_display" score="{{ rate.score / 2.0}}"></div>
+                            </div>
+                            {% if rate.comment %}
+                            <div class="contentArea">{{ rate.comment }}</div>
+                            {% endif %}
+                        </div>
+                        </li>
+                        {% endfor %}
+
+                        {% if rates|length > 5 %}
+                        <li> <div class="more_rates">更多评论</div></li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}

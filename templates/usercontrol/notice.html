@@ -1,0 +1,17 @@
+{% extends "base.html"%}
+{%block title%}
+资料设置
+{%endblock%}
+    <!-- href="/static/style.css" 表示网站根目录下的文件 -->
+    <!-- href="static/style.css" 表示网站当前域名下的文件，比如当前域名是127.0.0.1/test/login/, 网页检索静态文件是的域名将会是127.0.0.1/test/login/static/style.css。所以当要引用根目录下的静态文件时，href前的单斜杠是必须要的 -->
+{%block stylesheet%}
+<link rel="stylesheet" type="text/css" href="/static/setting.css"/>
+{%endblock%}
+{%block content%}
+    <div id="notice">
+        <div id="noticeContent">
+            <p id="noticeMsg">{{ msg }}</p>
+            <a href='/' class="pButton" style="margin: 0;">返回首页</a>
+        </div>
+    </div>
+{%endblock%}

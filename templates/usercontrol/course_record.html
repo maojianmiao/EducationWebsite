@@ -1,0 +1,44 @@
+{% extends "base.html"%}
+{%block title%}
+{{ title }}
+{%endblock%}
+    <!-- href="/static/style.css" 表示网站根目录下的文件 -->
+    <!-- href="static/style.css" 表示网站当前域名下的文件，比如当前域名是127.0.0.1/test/login/, 网页检索静态文件是的域名将会是127.0.0.1/test/login/static/style.css。所以当要引用根目录下的静态文件时，href前的单斜杠是必须要的 -->
+{%block content%}
+    <div id="allcontent">
+        <div class="course_summary">
+            <div class="course_jitang center">
+                <span>{{ jitang.content }} —— {{ jitang.author }}</span>
+           </div>
+          </div>
+          <div class="record_nav">
+              <div class="my_course center">
+                <a href="/course/record" class="btn_nav my_lessons btn_selected">我的学习</a>
+                <a href="/course/record/collect" class="btn_nav my_collects ">我的收藏</a>
+              </div>
+          </div>
+        <div id="content_center" class="center">
+            <div class="record_container">
+                
+                <div class="inx_course_view record_view">
+                       {% for course in courses %}
+                        <div class="inx_course_item" id="{{ course.id}}">
+                            <a href="/course/{{ course.id }}" target="_blank">
+                            <div style="overflow: hidden;">
+                                <div class="inx_course_pic" >
+                                <img class="inx_img" src="{{ course.item_image }}" width="260px" height="146px"></img></div>
+                            </div>
+                            <div class="course_text_info">
+                                <div class="inx_course_title">{{ course.title }}</div>
+                                <div class="inx_course_user">{{ course.users.name}}</div>
+                            </div>
+                            </a>
+                        </div>
+                        {% endfor%}
+                </div>
+            
+
+            </div>
+        </div>
+    </div>
+{%endblock%}

@@ -1,0 +1,15 @@
+<li>
+<div class="commentItem">
+     <div class="userArea">
+        <a href="/user/{{ rate.user_id }}" target="_blank"><img class="img" src="{{ rate.users.head_pic }}"></img></a>
+        <a href="/user/{{ rate.user_id }}" target="_blank" class="nickName">{{ rate.users.name }}</a>
+         <span>{{ rate.str_create_date }}</span>
+    </div>
+    <div class="comment_rate">
+    <div>评分:</div>
+      <div class="my_rate rate_display" score="{{ rate.score / 2.0}}"></div>
+      </div>
+    {% if rate.comment %}
+    <div class="contentArea">{{ rate.comment }}</div>
+    {% endif %}
+ </li>

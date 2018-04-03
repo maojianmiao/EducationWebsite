@@ -1,0 +1,7 @@
+pycrypto
+moviepy
+sqlalchemy
+chardet
+flask==0.12.2
+tornado
+Pillow

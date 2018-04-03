@@ -1,0 +1,926 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2018-02-22 15:31:14
+ * @version $Id$
+ */
+ body{
+    position: relative;
+    height: auto;
+    margin: 0 0 0 0;
+    font-size: 14px;
+    color: black;
+    border-collapse:collapse;
+    font-family: "微软雅黑";
+ }
+ a{
+text-decoration:none;
+}
+input, textarea,select, button{
+    font-family: "微软雅黑";
+}
+
+
+.f_left {position: relative;float: left;}
+.f_right {position: relative; float: right;}
+html{
+	background-color: lightgrey;
+}
+#allcontent{
+    top: 60px;
+    position: relative;
+    width: 100%;
+    height: auto;
+
+}
+#center_menu a{
+    color: white;
+}
+
+#navigator{
+
+    height: auto;
+    width: 100%;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    border-width: 1px 0px;
+    top:0px;
+    left: 0px;
+    text-align: center;
+    z-index: 999;
+}
+#flash_msg{
+    background-color: yellow;
+    position: relative;
+}
+#menu{
+    position: relative;
+    width: 100%;
+    height: 60px;
+    background-color:olive; /* olive */
+    position: relative;
+    color: white;
+
+}
+.center{
+    position: relative;
+    width: 1200px;
+    margin: 0 auto 0 auto;
+
+}
+
+#center_menu{
+    height: 60px;
+    overflow: hidden;
+    width: 1200px;
+    /*background-color: navy;*/
+    position: relative;
+
+}
+
+#menu_left{
+    float: left;
+    height: 60px;
+    position: relative;
+    width: auto;
+}
+
+.hide{
+    display: none;
+    position:absolute;
+    right: 0;
+    height: 80px;
+    width: 140px;
+    z-index: 999;
+    color: dimgray;
+    border: 1px solid lightgray;
+    background-color: white;
+    font-size: 12px;
+
+}
+.head_pic:hover .hide{ display: block; }
+.hide_menu a{
+    display: block;
+    color: gray;
+    margin-left: 10px;
+}
+.hide_menu{
+    list-style-type: none;
+    margin:0;
+    padding: 0;
+}
+.hide_menu li{
+    height: 35px;
+    width: 100%;
+    line-height: 35px;
+    text-align: left;
+}
+
+.hide_menu li:hover{
+    background-color: whitesmoke;
+}
+#logo_img{
+    /*height: 30px;
+    margin-top:15px;*/
+    height: 60px;
+    line-height: 60px;
+    text-align: left;
+    font-size: 25px;
+    width:168px;
+    float: left;
+    margin-right: 10px;
+}
+#entrance{
+    float: left;
+    height: 60px;
+    width: 300px;
+    position: relative;
+    font-size: 17px;
+    display: inline;
+    line-height: 60px;
+}
+
+#entrance a{
+    height: 60px;
+    width: 75px;
+    display: block;
+    float: left;
+    margin-left: 10px;
+
+}
+
+#entrance a:hover{
+    background-color: lightseagreen;
+}
+
+#menu_right{
+    position: relative;
+    float: right;
+    line-height: 30px;
+    position: relative;
+    overflow: hidden;
+    font-size: 15px;
+    padding: 15px 0 15px 0;
+
+}
+#user_ctrl{
+    height: 30px;
+    width: 30px;
+    float: right;
+    z-index: 5;
+}
+
+#word_ctrl{
+    width: 350px;
+    height: 30px;
+    line-height: 30px;
+    float: right;
+    text-align: center;
+    margin-right: 5px;
+    overflow: hidden;
+    top:0px;
+
+}
+#word_ctrl ul{
+    list-style-type: none;
+    display: inline;
+
+}
+#word_ctrl li{
+    font-size: 15px;
+    height: 30px;
+    width: 75px;
+    float: right;
+}
+#word_ctrl a:hover{
+    color: lightseagreen;
+}
+#search_pannel{
+    width: 300px;
+    height: 30px;
+    line-height: 30px;
+    float: right;
+    position: relative;
+    background-color: white;
+
+}
+search_pannel input, textarea,select, button{
+    font-size: 13px;
+}
+.search_select{
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    color: gray;
+    border-style: none;
+    outline: none;
+    cursor: pointer;
+    
+}
+option:hover{color: lightseagreen;}
+.search_input{
+    width: 187px;
+    height: 30px;
+    line-height: 30px;
+    float: right;
+    border: none;
+    outline: none;
+    padding:0;
+    color: gray;
+}
+#search_submit{
+    width: 50px;
+    height: 30px;
+    float: right;
+    color: white;
+    background-color: lightseagreen;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+}
+#search_submit:hover{
+    background-color: rgba(32,178,170,0.8);
+}
+#input_note{
+    position: absolute;
+    color: gray;
+    line-height: 30px;
+    cursor: text;
+    font-size: 13px;
+}
+
+ #about_center{
+    width: 1200px;
+    margin:0px auto 0px auto;
+    background-color: white;
+    position: relative;
+    top:60px;
+    white-space: pre-wrap;
+
+ }
+
+ /* style of course page */
+.bgwhite{
+    background-color: white;
+}
+.course_info{
+    position: relative;
+    width: 1160;
+    height: 250px;
+    padding: 20px;
+}
+.course_img{
+    position: relative;
+    float: left;
+    height: 300px;
+    width: 444px;
+}
+
+.course_info_right{
+    position: relative;
+    width: 600px;
+    height: 300px;
+    float: left;
+    margin-left: 15px;
+}
+.course_score div{
+    position: relative;
+    margin-right: 15px;
+    color:darkgray;
+    font-size: 14px;
+    float: left;
+}
+.course_collect{
+    float: right;
+}
+.course_collect a{
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    width: 70px;
+    text-align: center;
+    border: 1px solid lightgray;
+    color: gray;
+    font-size: 13px;
+}
+
+a.added {
+   color: olive;
+   background-color: lightgray;
+}
+.course_collect a:hover{
+    color: olive;
+    background-color: lightgray;
+}
+
+.progress{
+    position: relative;
+    margin-top: 20px;
+    height: 60px;
+    width: 100%;
+    border-top:1px solid gray;
+    border-bottom:1px solid gray;
+    padding-top:35px; 
+}
+
+.pbar{
+    height: 15px;
+    width: 100%;
+    background-color: blue;
+}
+.notice{
+    position: relative;
+    margin-top: 25px;
+}
+
+.catalog{
+    width: 100%;
+    height: auto;
+
+}
+
+.catalog_title span{
+    font-size: 30px;
+    color: gray;
+}
+
+.lesson_items{
+    margin-top: 15px;
+    padding-bottom: 30px;
+}
+.lesson{
+    position: relative;
+    overflow: hidden;
+}
+
+.lession_guide{
+    margin-left: 15px;
+}
+.lesson a{
+    height: 36px;
+    line-height: 36px;
+    display: block;
+    cursor: pointer;
+    color: dimgray;
+    font-weight: 500;
+}
+.lesson a:hover{
+    background-color: lightgreen;
+}
+
+.lesson_progress{
+    position: relative;
+    float: right;
+    margin-right: 10px;
+    white-space: pre;
+}
+.course_navigator{
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    float: left;
+}
+.course_navigator a{
+    position: relative;
+    text-align: center;
+    display: block;
+    font-size: 18px;
+    color: black;
+    height: 50px;
+    width: 75px;
+    cursor: pointer;
+    float: left;
+}
+
+.course_selected{
+    background-color: olive;
+    color: white;
+}
+.course_main_content{
+    margin-top: 20px;
+    position: relative;
+    float: left;
+    width: 100%
+
+}
+.course_navigator a:hover{
+    color: blue;
+}
+.course_detail{
+    position: relative;
+    height:500px;
+}
+.course_content_left{
+    position: relative;
+    width: 880px;
+    float: left;
+}
+
+.course_content_right{
+    position: relative;
+    width: 300px;
+    float: right;
+    height: auto;
+}
+
+.course_rate_title{
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    border-bottom: solid 1px lightgray; 
+
+}
+.user_rate_area{
+    position: relative;
+    height: 165px;
+    overflow: hidden;
+}
+.user_rate_margin{
+    margin-left: 10px;
+}
+.star_area{
+    position: relative;
+    height: 35px;
+    padding-top: 10px;
+}
+.comment_text_area textarea{
+    width: 270px;
+    height: 80px;
+    padding: 0;
+}
+.course_func{
+    line-height: 30px;
+}
+.comment_submit{
+    margin-top: 5px;
+    position: relative;
+    float: right;
+    margin-right: 20px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    width: 55px;
+    background-color: blue;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+.rate_title{
+    position: relative;
+    float: left;
+
+}
+.my_rate{
+        white-space: nowrap;
+    }
+
+.comment_rate{
+    margin-top: 6px;
+    overflow: hidden;
+}
+.comment_rate div{
+    position: relative;
+    float: left;
+}
+.commentList li{
+    list-style-type: none;
+    margin-top: 10px;
+}
+.commentList ul{
+    padding: 0 10px 0 10px;
+}
+.commentList a{
+    position: relative;
+    display: block;
+    height: 30px;
+    float: left;
+    margin-right: 7px;
+}
+.userArea span{
+    float: right;
+}
+.commentItem{
+    border-bottom: 1px solid gainsboro;
+    padding-bottom: 25px;
+}
+.userArea{
+    height: 30px;
+    line-height: 30px;
+}
+.contentArea{
+    margin-top: 15px;
+    line-height: 20px;
+}
+.img{
+    width: 30px;
+    height: 30px;
+}
+
+.more_rates{
+    text-align: center;
+    color: gray;
+}
+
+.inprogress{
+    color: blue;
+}
+/* style of index page*/
+
+.index{
+    position: relative;
+    background-color: white;
+    height: auto;
+
+}
+
+.indexContainer{
+    position: relative;
+    overflow: hidden;
+}
+.inx_course_view{
+    position: relative;
+    margin-top: 30px;
+    width: 1200px;
+    overflow: hidden;
+}
+.inx_course_item{
+    position: relative;
+    width: 214px;
+    height: 190px;
+    float: left;
+    margin-right: 25px;
+    margin-top: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: white;
+    
+}
+.inx_img{
+    width: 214px;
+    height: 120px;
+}
+.course_text_info{
+    margin-left: 5px;
+}
+.inx_course_title{
+    color: dimgray;
+    margin-top: 2px;
+    height: 40px;
+    line-height: 18px;
+}
+.inx_course_user{
+    margin-top: 2px;
+    color: darkgray;
+    font-size: 13px;
+}
+div.inx_course_title:hover{
+    color: blue;
+}
+.inx_course_pic{
+    transition:width 1s, height 1s,transform 1s;
+}
+div.inx_course_pic:hover{
+    transform:scale(1.3,1.3);
+}
+
+.category_name{
+    font-size: 24px;
+    color: black;
+
+}
+.more{
+    font-size: 12px;
+    color: gray;
+}
+
+/* ??ҳ */
+.search_container{
+    background-color: white;
+
+}
+
+.search_summary{
+
+    background-color: whitesmoke;
+}
+.search_navigator{
+    height: 50px;
+    width: 100%;
+    line-height: 50px;
+
+}
+.search_navigator span{
+    color: gray;
+
+}
+.search_navigator a{
+    color: black;
+}
+
+.serarch_result{
+    background-color: white;
+    padding-top: 30px;
+}
+.serarch_result div{
+    position: relative;
+    margin-bottom: 0px;
+    line-height: 40px;
+    font-size: 20px;
+    height: 40px;
+    color: gray;
+}
+
+.serarch_result span{
+    color: black;
+}
+
+/* style of category */
+
+.contentPage{
+    margin-top: 30px;
+    position: relative;
+    height: 50px;
+    width: 100%;
+}
+
+.pnav{
+    width: 65px;
+    height: 32px;
+}
+.pagenum{
+    height: 32px;
+    width: 32px;
+
+}
+.pbtn{
+    position: relative;
+    float: left;
+    line-height: 32px;
+    text-align: center;
+    border: 1px solid gray;
+    margin-right: 5px;
+    background-color: lightgray;
+    color: black;
+}
+
+.pageSelected{
+    color: blue;
+    background-color: white;
+}
+
+.disabled{
+    color:gray;
+}
+
+/* style of course record */
+
+.course_summary{
+    
+    background: linear-gradient(to right, blue, cornflowerblue);
+}
+
+.course_jitang{
+    height: 100px;
+    line-height: 100px;
+    color: white;
+    font-size: 16px;
+}
+.record_nav{
+    background-color: white;
+    height: 60px;
+    width: 100%;
+}
+.my_course{
+    padding-left: 0px;
+    font-size: 20px;
+    overflow: hidden;
+    
+}
+
+.btn_nav{
+    display: block;
+    height: 60px;
+    width: 100px;
+    float: left;
+    line-height: 60px;
+    text-align: left;
+    color: black;
+    
+}
+
+.btn_selected{
+    color: olive;
+    border-bottom: 3px solid olive;
+}
+
+
+/* style of login page*/
+.logintitle{
+    position: relative;
+    height: 70px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.logintitle_sub{
+    position: relative;
+    float: left;
+    height: 70px;
+    line-height: 70px;
+}
+.greeting_word{
+    font-size: 30px;
+    color: olive;
+}
+
+#login_content{
+    height: 550px;
+    width: 100%;
+    background-color: blue;
+}
+div.shuru
+{
+    margin-top: 50px;
+    position:relative;
+    float: right;
+    border-color:gray;
+    background-color: white;
+    width:400px;
+    height:400px;
+}
+.shuru_title{
+    text-align: center;
+    height: 60px;
+    font-size: 25px;
+    line-height: 60px;
+    border-bottom: 1px solid lightgray;
+    color: olive;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.login_form{
+    padding-left: 30px;
+}
+
+.input_note{;
+    font-size: 12px;
+    height: 23px;
+    line-height: 23px;
+    margin-bottom: 5px;
+}
+.warning_note{
+
+    border: 1px solid red;
+    color: red;
+    background-color: #ffebeb;
+}
+div.zhuce{
+width:500px;
+height:50px;
+position:absolute;
+}
+#input_verify_code
+{
+    width:190px;
+    height:30px;
+    font-size:14px;
+    font-weight:500;
+    font-color:gray;
+    margin-top:20px;
+    margin-left:100px;
+}
+
+.input_elem
+{
+    position: relative;
+    height: 40px;
+    font-size:14px;
+    font-weight:500;
+    float: left;
+    border: none;
+    padding: 0;
+}
+.label_input{
+    position: absolute;
+    color: gray;
+    left: 3px;
+    height: 40px;
+    line-height: 40px;
+}
+.div_ctrl{
+    position: relative;
+    border: 1px solid gray;
+}
+.ewidth{
+    width:340px;
+}
+.below_input{
+    margin-top: 25px;
+}
+#btn_auth_code
+{
+    width:100px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+    font-weight:600;
+    font-color:gray;
+    border: 1px solid;
+    background-color: olive;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    /*margin-left:10px;*/
+}
+#input_auth_code{
+    width: 220px;
+}
+.login_nav{
+    height: 40px;
+    line-height: 40px;
+}
+.forget_pwd{
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+}
+
+.btn_submit{
+    background-color: olive;
+    color: white;
+    font-size: 25px;
+    letter-spacing: 30px;
+    text-indent: 30px;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+}
+.forget_pwd a{
+    color: dimgray;
+}
+
+/* style of signup page*/
+.shuru_signup{
+    margin-top: 20px;
+    width: 400px;
+    height: 450px;
+    background-color: white;
+
+}
+.login_nav a{
+    color: blue;
+}
+
+/* style of course_manage */
+.course_manage{background-color: white;}
+.manage_info{height: 50px; line-height: 50px;overflow: hidden;background-color: white;}
+.manage_info_title{font-size: 20px; line-height: 50px;}
+.manage_info_desc{font-size: 12px;margin-left: 10px; color: gray;}
+.manage_nav{height: 30px;border-top: 1px solid lightgray;}
+.manage_nav ul{list-style-type: none;margin: 0; padding: 0;}
+.manage_nav li{position: relative; float: left;margin-right: 10px; background-color: olive; padding: 0 5px 0 5px;cursor: pointer;color: white;}
+.manage_nav a{color: white;}
+.manage_menu{height: 20px;line-height: 20px;margin-top:10px;}
+.manage_nav li:hover{color: red;}
+.course_display{margin-top:5px; }
+.course_table{height: 600px;}
+.course_table table{width: 1200px;}
+.td_checkbox{text-align: left;width: 20px;}
+.td_title{text-align: left;}
+.course_table tr {height: 20px; line-height: 20px;}
+.course_table td{text-align: left;color: gray;overflow: hidden;}
+th{border-bottom: 1px solid lightgray;}
+
+/* style of low_layer*/
+
+.low_layer{position: absolute;top: 0;bottom: 0;width:100%; z-index: -999;background-color: lightgray;background: rgba(211,211,211,0.7)}
+.course_update{width: 700px;height: 630px;margin-top:50px;margin-left: auto;margin-right:auto;background-color: white}
+.op_title{height: 35px;font-size: 20px;text-align: center;line-height: 60px;font-weight: bold;}
+td.title{text-align: right;padding: 0px 15px 0 0;width: 90px;color: gray;}
+td{vertical-align: top;}
+.cm_elem{height: 25px; width: 320px;}
+.course_edit table{border-spacing: 20px}
+.img_upload{margin-left: 10px;}
+.img_input{margin-top: 5px;}
+.imgChange{
+    background-color: olive;
+    width: 80px;
+    height: 30px;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    border-style: none;
+    cursor: pointer;
+}
+.course_edit textarea{width: 480px;height: 240px;}
+.couse_update_submit{border-top: 1px solid #eaeaea;background-color: #fbfafa;height: 60px;}
+.course_btn_submit{height: 30px;width: 65px;background-color: olive;color: white;line-height: 30px;text-align: center;margin-left: 140px;margin-top: 10px;cursor: pointer;}
+.close{color: gray;width: 15px;height: 15px;line-height: 15px;text-align: center;cursor: pointer;background-color: whitesmoke;}
+.img_display{background: url('/static/images/course160x90.png');width: 240px;height: 135px;}
+.img_display img{width: 240px;height:135px;}
+.warn_note{color: red;}

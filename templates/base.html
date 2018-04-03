@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>
+{%block title%}
+{%endblock%}
+</title>
+<meta name="教育网站" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<!-- href="/static/style.css" 表示网站根目录下的文件 -->
+<!-- href="static/style.css" 表示网站当前域名下的文件，比如当前域名是127.0.0.1/test/login/, 网页检索静态文件是的域名将会是127.0.0.1/test/login/static/style.css。所以当要引用根目录下的静态文件时，href前的单斜杠是必须要的 -->
+<link rel="shortcut icon" href="/static/images/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="/static/style.css"/>
+<script type="text/javascript" src="/static/jquery.min.js"></script>
+<script type="text/javascript" src="/static/scripts.js"></script>
+
+{%block stylesheet%}
+{%endblock%}
+
+</head>
+<body>
+    <div id="navigator">
+        <div id="flash_msg"></div>
+        <div id="menu">
+            <div class="center" style="z-index: 99">
+                <div id="center_menu" >
+                    <div id="logo_img">
+                            <a href="/index" target="_self">
+                                教育网站设计
+                                <!-- <img src="/static/images/logo.png" width="168" height="30" title="林于铃毕业设计" /> -->
+                            </a>
+                    </div>
+                    <div id="entrance">
+                        <a href="/course/all" class="entrance_a">所有课程</a>
+                        <a href="/aboutthis" class="entrance_a">关于网站</a>
+                        <a href="#" class="entrance_a">还有吗</a>
+                    </div>
+
+                    <div id="menu_right">
+                        <div id="user_ctrl">
+                                <div id="head_pic" class="head_pic"> 
+                                    {%if session['head_pic'] %}
+                                    <img src="{{ session['head_pic'] }}" width="30px" height="30px">
+                                    {% else %}
+                                    <img src="/static/images/defaultpic.jpg" width="30px" height="30px">
+                                    {% endif %}
+                                </div>
+
+                        </div>
+                        <div id="word_ctrl">
+                            <ul>
+                            {%if session["username"] %}
+                                <li><a href="/user/{{ session['userid']}}">{{ session["username"] }}</a></li>
+                                <li><a href="/course/record">我的学习</a></li>
+                                <li><a href="/course/manage">我的课程</a></li>
+                            {% else %}
+                                <li><a href="/signin">登录</a>/<a href="/signup">注册</a></li>
+                                <li><a href="/signup">我的学习</a></li>
+                            {% endif %}
+                            </ul>
+                        </div>
+
+                        <div id="search_pannel">
+                            <input type="button" id="search_submit" accesskey="c" onclick="search_submit()" value="搜 索"/>
+                            <script>
+                                document.onkeydown = function(){
+                                    <!-- 为搜索按钮绑定enter快捷键 -->
+                                    if (event.keyCode == 13){
+                                        document.getElementById("search_submit").click();
+                                    }
+                                }
+                            </script>
+                            <div class="search_input">
+                                <input type="text" id="search_text" name="search_text" class="search_input" onkeydown="hideLabel('input_note')" />
+                                <label id="input_note" for="search_text" onfocus="transferFocus('search_text')">请输入要搜索的内容</label>
+                            </div>
+                            
+                            <div class="" ="search_select">
+                                <select name="search_type" class="search_select" id="search_type">
+                                    <option value="course">课程名</option>
+                                    <option value="provider">制作者</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {%if session["username"] %}
+                <div class="hide">
+                     <ul class="hide_menu">
+
+                         <li><a href="/setting?id={{ session['userid']}}">设置</a></li>
+                          <li><a href="/logout">退出</a></li>
+                    </ul>
+              </div>
+              {% endif %}
+            </div>
+        </div>
+    </div>
+{%block content%}
+{%endblock%}
+<!--
+    <div id="allcontent">
+        <div class="center" id="content_center" ><h1>主内容区域</h1></div>
+    </div>
+-->
+</body>
+</html>

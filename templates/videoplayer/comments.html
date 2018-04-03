@@ -1,0 +1,12 @@
+{% for comment in commentItems %}
+    <li>
+       <div class="commentItem">
+       <div class="userArea">
+       <a href="/user/{{ comment.user.id }}" target="_blank"><img class="img" src="{{ comment.user.head_pic }}"></img></a>
+       <a href="/user/{{ comment.user.id }}" class="nickName">{{ comment.user.name }}</a>
+      <span>{{ comment.str_create_date }}</span>
+     </div>
+    <div class="contentArea">{{ comment.comment }}</div>
+    </div>
+   </li>
+{% endfor %}

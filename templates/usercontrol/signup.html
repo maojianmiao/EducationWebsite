@@ -1,0 +1,51 @@
+{% extends "base.html"%}
+{% block title%}
+注册账号
+{%endblock%}        <!-- href="/static/style.css" 表示网站根目录下的文件 -->
+    <!-- href="static/style.css" 表示网站当前域名下的文件，比如当前域名是127.0.0.1/test/login/, 网页检索静态文件是的域名将会是127.0.0.1/test/login/static/style.css。所以当要引用根目录下的静态文件时，href前的单斜杠是必须要的 -->
+{%block content%}
+    <div id="allcontent">
+           <div class="logintitle">
+                <div class="center">
+                    <div class="greeting_word logintitle_sub">欢迎注册</div>
+                </div>
+          </div>
+        <div id="login_content">
+        <div class="center">
+        <div class="shuru_signup f_right">
+            <div class="shuru_title">账号注册</div>
+            <div class="login_form">
+                <div class="input_note ewidth {% if msg %} warning_note{% endif %}" id="login_input_note" >{{ msg }}</div>
+            <form method = 'post' enctype="multipart/form-data" action="/signup" onsubmit="return validate_signup()">
+            <div class="ewidth input_elem div_ctrl">
+	            <input id="username" type="text" class="ewidth input_elem" name="username"  onkeydown="hideLabel('username_note')"/>
+                <label id="username_note" for="username" class="label_input">邮箱地址</label>
+            </div>
+        <div class="auth_code ewidth input_elem below_input">
+            <div class="input_elem div_ctrl">
+                <input id="input_auth_code" type="text" name="input_auth_code" class="input_elem" onkeydown="hideLabel('auth_code_note')"/>
+            </div>
+            <label id="auth_code_note" for="input_auth_code" class="label_input" >验证码</label>
+            <div id="btn_auth_code" onclick="getAuthCode('btn_auth_code')" class="f_right">获取验证码</div>
+        </div>
+            <div class="ewidth input_elem div_ctrl below_input">
+               <input id="passwd" name="passwd" type="password" class="ewidth input_elem" onkeydown="hideLabel('passwd_note')"/>
+                <label id="passwd_note" class="label_input" for="passwd">密码长度6至24字符</label>
+           </div>
+           <div class="ewidth input_elem div_ctrl below_input">
+            <input id="passwd2" name="passwd2" type="password" class="ewidth input_elem div_ctrl" onkeydown="hideLabel('passwd2_note')" style="border: none;"/>
+            <label id="passwd2_note" class="label_input" for="passwd2">请再次输入密码</label>
+            </div>
+
+        <div class="ewidth input_elem div_ctrl below_input">
+        <input type="submit" class="ewidth input_elem btn_submit" value = "注册" />
+    </div>
+</form>
+
+<div class="login_nav f_left">
+已有账号？点击<a href="signin">登录</a>
+</div>
+</div>
+{%endblock%}
+</div>
+</div>

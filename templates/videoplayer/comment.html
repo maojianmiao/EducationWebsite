@@ -1,0 +1,10 @@
+    <li>
+       <div class="commentItem">
+       <div class="userArea">
+       <a href="/user/{{ user.id }}" target="_blank"><img class="img" src="{{ user.head_pic }}"></img></a>
+       <a href="/user/{{ user.id }}" class="nickName">{{ user.name }}</a>
+      <span>{{ comment.str_create_date }}</span>
+     </div>
+    <div class="contentArea">{{ comment.comment }}</div>
+    </div>
+   </li>
