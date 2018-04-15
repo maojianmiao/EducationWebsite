@@ -159,6 +159,7 @@ $(document).ready(function(){
       });
     });
 
+    clearLabel();
 }); // end of document
 
 
@@ -1208,4 +1209,16 @@ function f_audit(url){
             return false;
 }}
 
+function clearLabel(){
+    var username = $('#username').val();
+    var passwd = $('#passwd').val();
 
+    console.log('username:' + username);
+    console.log('passwd: ' + passwd);
+    if (username){
+      $('#username_note').css('display','none');
+    }
+    if (passwd){
+      $('#passwd_note').css('display','none');
+    }
+}

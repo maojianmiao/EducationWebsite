@@ -10,7 +10,7 @@ from sqlalchemy.ext.declarative import declarative_base
 import os
 
 #sqlite数据库路径，最好是绝对路径
-database_uri = 'D:/Projects/EducationWeb/education.db'
+database_uri = 'D:/Projects/EducationWebsite/education.db'
 engine = create_engine('sqlite:///' + database_uri, convert_unicode=True)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,

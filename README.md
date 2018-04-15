@@ -16,8 +16,8 @@ host配置：
 
 运行：
 
-    sqlite的数据库路径是绝对路劲，从git下载代码后，需要修改models/__init__.py里的database_uri变量为功能根目录education.db对应的绝对路径。
-    直接运行runserver.py文件，默认端口5000
+    sqlite的数据库路径是绝对路径，从git下载代码后，需要修改models/__init__.py里的database_uri变量为功能根目录education.db对应的绝对路径。
+    直接运行debugserver.py文件，默认端口5000
 
 各文件夹分类：
 
@@ -50,7 +50,7 @@ host配置：
         对应views/usercontrol.py视图模块里所用到的模板
 五、uploads——文件上传存放文件夹
 
-    暂未用到
+    头像、课程打底图片会上传到此文件夹中
 
 六、views——视图和地址管理模块包
 
