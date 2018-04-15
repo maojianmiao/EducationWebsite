@@ -8,7 +8,7 @@
 from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
-from runserver import app
+from debugserver import app
 
 print("start server...")
 http_server = HTTPServer(WSGIContainer(app))

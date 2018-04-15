@@ -1,0 +1,14 @@
+<ul class="ac_menu_ul">
+    {% for category in categorys %}
+    <li class="p_li">
+        <a href="/category/{{ category.id }}">{{ category.category_name }}</a>
+        {% if category.subs %}
+            <ul class="subul">
+                {% for sub in category.subs %}
+                <li><a href="/category/{{ sub.id }}">{{ sub.category_name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li >
+    {% endfor %}
+</ul>

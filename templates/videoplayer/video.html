@@ -152,11 +152,15 @@ $(document).ready(function() {
 		</div>
 	</div>
 	<div class="sideArea" id="detailBox" style="display: none">
-		<p>{{ course.title}}</p>
-		<p> {{ course.score}} 分</p>
-		<p>发布者:{{ author }}</p>
+		<div class="detailBox_base">
+			<p>课程名：{{ course.title}}</p>
+			<p>评分：{{ course.score}} 分</p>
+			<p>发布者:{{ author }}</p>
+		</div>
 		<hr>
-		<h1>{{video.description}}</h1>
+		<div class="detailBox_desc">
+			{{video.description}}
+		</div>
 	</div>
 </div>
 </body>

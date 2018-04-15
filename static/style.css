@@ -14,30 +14,31 @@
     border-collapse:collapse;
     font-family: "微软雅黑";
  }
+ label{
+    cursor: text;
+ }
  a{
 text-decoration:none;
 }
+ul{list-style-type: none;}
 input, textarea,select, button{
     font-family: "微软雅黑";
 }
 
-
+.white{color: white;}
+.c_center{text-align: center;}
 .f_left {position: relative;float: left;}
 .f_right {position: relative; float: right;}
 html{
-	background-color: lightgrey;
+	background-color: ;
 }
 #allcontent{
-    top: 60px;
     position: relative;
+    top: 60px;
     width: 100%;
     height: auto;
 
 }
-#center_menu a{
-    color: white;
-}
-
 #navigator{
 
     height: auto;
@@ -59,7 +60,7 @@ html{
     position: relative;
     width: 100%;
     height: 60px;
-    background-color:olive; /* olive */
+    background-color:#00806E; /* #00806E */
     position: relative;
     color: white;
 
@@ -73,7 +74,6 @@ html{
 
 #center_menu{
     height: 60px;
-    overflow: hidden;
     width: 1200px;
     /*background-color: navy;*/
     position: relative;
@@ -91,7 +91,6 @@ html{
     display: none;
     position:absolute;
     right: 0;
-    height: 80px;
     width: 140px;
     z-index: 999;
     color: dimgray;
@@ -141,26 +140,26 @@ html{
     display: inline;
     line-height: 60px;
 }
-
-#entrance a{
-    height: 60px;
-    width: 75px;
+#ac_btn:hover div{
     display: block;
-    float: left;
-    margin-left: 10px;
-
 }
-
-#entrance a:hover{
-    background-color: lightseagreen;
-}
+.ac_menu{background-color: #d2f0ee;color: white;position: absolute;display: none;}
+.ac_menu ul{margin: 0;list-style-type: none;padding: 0;width: 100px;}
+.ac_menu a{color: gray;}
+.p_li:hover ul{display: block;}
+.subul {position:absolute;background-color: #d2f0ee;padding: 0;left:100px; top:0px; display: none;}
+.subul li:hover{color: white;background-color:#00806E; }
+.subul li:hover a{color: white;background-color:#00806E; }
+.site_nav{height: 60px;width: 100px;margin-left: 10px;}
+.p_li{position: relative;height: 30px;line-height: 30px;}
+.p_li:hover{background-color: rgba(32,178,170,0.2);}
+.site_nav:hover{background-color: lightseagreen;cursor: pointer;}
 
 #menu_right{
     position: relative;
     float: right;
     line-height: 30px;
     position: relative;
-    overflow: hidden;
     font-size: 15px;
     padding: 15px 0 15px 0;
 
@@ -186,7 +185,6 @@ html{
 #word_ctrl ul{
     list-style-type: none;
     display: inline;
-
 }
 #word_ctrl li{
     font-size: 15px;
@@ -206,9 +204,11 @@ html{
     background-color: white;
 
 }
-search_pannel input, textarea,select, button{
-    font-size: 13px;
-}
+.search_help{display:none;position: absolute;background-color: white;width: 300px;height: auto;top:30px;}
+.search_help a:hover{background-color: lightgray;color:#00806E;}
+.search_help ul{margin:5px 0 5px 0;padding: 0;text-align: left;}
+.search_help a{padding-left: 60px;display: block;overflow: hidden;color: dimgray;height: 30px;}
+#search_pannel:hover .search_help{display: block;border-top:1px solid #00806E;}
 .search_select{
     width: 60px;
     height: 30px;
@@ -262,9 +262,24 @@ option:hover{color: lightseagreen;}
 
  }
 
+/* style of footer */
+.c_footer{color:black;position:relative;margin-top: 60px;width:100%;background-color: #00806E;overflow: hidden;}
+.site_desc{margin-top:20px;overflow: hidden;}
+.site_info{width: 400px;margin-top: 5px;}
+.site_contact_info{margin-top: 50px;}
+.copyright{position: relative;bottom: 10px;}
+.site_address span{ line-height: 30px; }
+.copyright a{color: white;}
+.copyright span{color: white;}
+
+
  /* style of course page */
 .bgwhite{
     background-color: white;
+    border: 1px solid lightgray;
+}
+.course_page{
+    overflow: hidden;
 }
 .course_info{
     position: relative;
@@ -308,11 +323,11 @@ option:hover{color: lightseagreen;}
 }
 
 a.added {
-   color: olive;
+   color: #00806E;
    background-color: lightgray;
 }
 .course_collect a:hover{
-    color: olive;
+    color: #00806E;
     background-color: lightgray;
 }
 
@@ -329,7 +344,7 @@ a.added {
 .pbar{
     height: 15px;
     width: 100%;
-    background-color: blue;
+    background-color: #00806E;
 }
 .notice{
     position: relative;
@@ -397,7 +412,7 @@ a.added {
 }
 
 .course_selected{
-    background-color: olive;
+    background-color: #00806E;
     color: white;
 }
 .course_main_content{
@@ -408,7 +423,7 @@ a.added {
 
 }
 .course_navigator a:hover{
-    color: blue;
+    color: lightseagreen;
 }
 .course_detail{
     position: relative;
@@ -464,7 +479,7 @@ a.added {
     height: 30px;
     line-height: 30px;
     width: 55px;
-    background-color: blue;
+    background-color: #00806E;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -527,7 +542,7 @@ a.added {
 }
 
 .inprogress{
-    color: blue;
+    color: #00806E;
 }
 /* style of index page*/
 
@@ -537,7 +552,7 @@ a.added {
     height: auto;
 
 }
-
+.beauty_pic img{ width:1200px;height:350px;}
 .indexContainer{
     position: relative;
     overflow: hidden;
@@ -578,8 +593,12 @@ a.added {
     color: darkgray;
     font-size: 13px;
 }
+.record_view{
+    width: 1220px;
+    min-height: 500px;
+}
 div.inx_course_title:hover{
-    color: blue;
+    color: #00806E;
 }
 .inx_course_pic{
     transition:width 1s, height 1s,transform 1s;
@@ -598,7 +617,7 @@ div.inx_course_pic:hover{
     color: gray;
 }
 
-/* ??ҳ */
+/* the style of search page */
 .search_container{
     background-color: white;
 
@@ -622,11 +641,11 @@ div.inx_course_pic:hover{
     color: black;
 }
 
-.serarch_result{
+.search_result{
     background-color: white;
     padding-top: 30px;
 }
-.serarch_result div{
+.search_result div{
     position: relative;
     margin-bottom: 0px;
     line-height: 40px;
@@ -634,13 +653,20 @@ div.inx_course_pic:hover{
     height: 40px;
     color: gray;
 }
-
-.serarch_result span{
+.search_course_view{
+    min-height: 500px;
+    width: 1220px;
+}
+.search_result span{
     color: black;
 }
 
 /* style of category */
 
+.category_pic img{
+    width: 1170px;
+    height: 325px;
+}
 .contentPage{
     margin-top: 30px;
     position: relative;
@@ -669,19 +695,19 @@ div.inx_course_pic:hover{
 }
 
 .pageSelected{
-    color: blue;
+    color: #00806E;
     background-color: white;
 }
 
 .disabled{
     color:gray;
 }
-
+.no_content{line-height: 100px;font-size: 25px;text-align: center;color: gray;}
 /* style of course record */
 
 .course_summary{
     
-    background: linear-gradient(to right, blue, cornflowerblue);
+    background: linear-gradient(to right,#00806E, #99E2D8 );
 }
 
 .course_jitang{
@@ -714,8 +740,8 @@ div.inx_course_pic:hover{
 }
 
 .btn_selected{
-    color: olive;
-    border-bottom: 3px solid olive;
+    color: #00806E;
+    border-bottom: 3px solid #00806E;
 }
 
 
@@ -735,23 +761,27 @@ div.inx_course_pic:hover{
 }
 .greeting_word{
     font-size: 30px;
-    color: olive;
+    color: #00806E;
 }
 
 #login_content{
-    height: 550px;
+    min-height: 500px;
     width: 100%;
-    background-color: blue;
+    background-color: rgba(0,128,110,0.2);
+    background: url(/static/images/yishujia.png);
+    background-position: center;
+    background-size: 100% 100vh;
 }
 div.shuru
 {
-    margin-top: 50px;
+    margin-top: 30px;
     position:relative;
     float: right;
     border-color:gray;
     background-color: white;
     width:400px;
     height:400px;
+    border: 1px solid lightgray;
 }
 .shuru_title{
     text-align: center;
@@ -759,7 +789,7 @@ div.shuru
     font-size: 25px;
     line-height: 60px;
     border-bottom: 1px solid lightgray;
-    color: olive;
+    color: #00806E;
     margin-bottom: 5px;
     font-weight: 600;
 }
@@ -828,10 +858,9 @@ position:absolute;
     height: 40px;
     line-height: 40px;
     font-size: 15px;
-    font-weight:600;
     font-color:gray;
     border: 1px solid;
-    background-color: olive;
+    background-color: #00806E;
     cursor: pointer;
     color: white;
     text-align: center;
@@ -851,13 +880,12 @@ position:absolute;
 }
 
 .btn_submit{
-    background-color: olive;
+    background-color: #00806E;
     color: white;
     font-size: 25px;
-    letter-spacing: 30px;
+    letter-spacing: 20px;
     text-indent: 30px;
     text-align: center;
-    font-weight: 600;
     cursor: pointer;
 }
 .forget_pwd a{
@@ -866,41 +894,42 @@ position:absolute;
 
 /* style of signup page*/
 .shuru_signup{
-    margin-top: 20px;
+    margin-top: 30px;
     width: 400px;
     height: 450px;
     background-color: white;
 
 }
 .login_nav a{
-    color: blue;
+    color: #00806E;
 }
 
 /* style of course_manage */
 .course_manage{background-color: white;}
-.manage_info{height: 50px; line-height: 50px;overflow: hidden;background-color: white;}
-.manage_info_title{font-size: 20px; line-height: 50px;}
-.manage_info_desc{font-size: 12px;margin-left: 10px; color: gray;}
+.manage_info{line-height: 50px;overflow: hidden;background-color: white;}
+.manage_info_title{font-size: 20px; line-height: 30px;}
+.manage_info_desc{font-size: 12px;margin-left:10px;color: gray;line-height: 30px;}
 .manage_nav{height: 30px;border-top: 1px solid lightgray;}
 .manage_nav ul{list-style-type: none;margin: 0; padding: 0;}
-.manage_nav li{position: relative; float: left;margin-right: 10px; background-color: olive; padding: 0 5px 0 5px;cursor: pointer;color: white;}
+.manage_nav li{position: relative; float: left;margin-right: 10px; background-color: #00806E; padding: 0 5px 0 5px;cursor: pointer;color: white;}
 .manage_nav a{color: white;}
 .manage_menu{height: 20px;line-height: 20px;margin-top:10px;}
 .manage_nav li:hover{color: red;}
 .course_display{margin-top:5px; }
-.course_table{height: 600px;}
+.course_table{overflow:hidden; min-height:500px}
 .course_table table{width: 1200px;}
 .td_checkbox{text-align: left;width: 20px;}
 .td_title{text-align: left;}
 .course_table tr {height: 20px; line-height: 20px;}
 .course_table td{text-align: left;color: gray;overflow: hidden;}
 th{border-bottom: 1px solid lightgray;}
-
+.mi_nav{color: gray}
+.mi_nav a{color: #00806E;}
 /* style of low_layer*/
 
 .low_layer{position: absolute;top: 0;bottom: 0;width:100%; z-index: -999;background-color: lightgray;background: rgba(211,211,211,0.7)}
-.course_update{width: 700px;height: 630px;margin-top:50px;margin-left: auto;margin-right:auto;background-color: white}
-.op_title{height: 35px;font-size: 20px;text-align: center;line-height: 60px;font-weight: bold;}
+.course_update{width: 700px;height: 630px;margin-top:20px;margin-left: auto;margin-right:auto;background-color: white}
+.op_title{height: 25px;font-size: 20px;text-align: center;color:white;line-height: 25px;font-weight: bold;background-color: #00806E}
 td.title{text-align: right;padding: 0px 15px 0 0;width: 90px;color: gray;}
 td{vertical-align: top;}
 .cm_elem{height: 25px; width: 320px;}
@@ -908,7 +937,7 @@ td{vertical-align: top;}
 .img_upload{margin-left: 10px;}
 .img_input{margin-top: 5px;}
 .imgChange{
-    background-color: olive;
+    background-color: #00806E;
     width: 80px;
     height: 30px;
     color: white;
@@ -919,8 +948,46 @@ td{vertical-align: top;}
 }
 .course_edit textarea{width: 480px;height: 240px;}
 .couse_update_submit{border-top: 1px solid #eaeaea;background-color: #fbfafa;height: 60px;}
-.course_btn_submit{height: 30px;width: 65px;background-color: olive;color: white;line-height: 30px;text-align: center;margin-left: 140px;margin-top: 10px;cursor: pointer;}
-.close{color: gray;width: 15px;height: 15px;line-height: 15px;text-align: center;cursor: pointer;background-color: whitesmoke;}
+.m_btn_submit{height: 30px;width: 65px;background-color: #00806E;color: white;line-height: 30px;text-align: center;margin-left: 140px;margin-top: 10px;cursor: pointer;}
+.close{color: white;width: 25px;height: 25px;line-height: 25px;font-size:20px;text-align: center;cursor: pointer;background-color: gray;}
+.close:hover{color: red;}
 .img_display{background: url('/static/images/course160x90.png');width: 240px;height: 135px;}
 .img_display img{width: 240px;height:135px;}
+.img_display video{width: 240px;height:135px;}
 .warn_note{color: red;}
+.course_edit select{width:80px;}
+/* style of find password */
+.fp_title{height: 50px;font-size: 20px;line-height: 50px;}
+.fp_content{width: 400px;height: 300px;margin-left: auto;margin-right: auto;margin-top: 20px;overflow: hidden;}
+.fp_steps{margin-left: 30px;color: lightseagreen;}
+
+/* style of change password page*/
+.cp_input{
+    margin-top: 15px;
+    width: 400px;
+    height: 450px;
+    background-color: white;
+
+
+}
+.cp_title{
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    border-bottom:1px solid lightgray
+}
+/* style of user page*/
+.user_base{overflow: hidden;}
+.user_base_info{text-align: center;height: 200px;background-color: whitesmoke;overflow: hidden;}
+.ub_head{margin-top: 20px;}
+.user_other{margin-top:20px;height: 550px;background:url('/static/images/user_intro.jpg') no-repeat center;background-size:contain;border: 1px solid lightgray}
+
+/* style of lesson_manage page*/
+.progress_text{color: lightseagreen;margin-top: 10px;}
+.item_image{width: 100%;}
+.item_image img{width: 320px;height: 180px;}
+.ii_image{width: 340px;}
+.course_status{color: #00806E;line-height: 30px;}
+.c_desc{line-height: 20px;overflow: hidden;}
+.lesson_info_title{font-size: 20px;}
+.lesson_info_desc{width:860px;line-height: 23px; margin-top: 5px;overflow: auto}

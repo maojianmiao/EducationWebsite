@@ -7,6 +7,7 @@
 from functools import wraps
 from flask import request,session,redirect,url_for
 from models.users import users
+from models.course import course
 import logging
 
 #用户登录控制，需要用户登录才能操作的视图，只需要在前面加@login_required
@@ -46,3 +47,43 @@ def self_login_required(f):
 
     return decorated_func
 
+#管理员权限装饰器，控制审核、审核驳回等视图只有管理员才能调用
+def admin_required(f):
+    @wraps(f)
+    def decorated_func(*args, **kwargs):
+        try:
+            level = session['level']
+            if level == 0:
+                #如果是管理员用户，允许进入当前页面
+                return f(*args, **kwargs)
+            else:
+                #如果要进入的用户信息页面是当前登录用户的信息页，则重定向到用户的基本信息展示页面
+                return redirect(url_for('index.index'))
+        except Exception,e:
+            logging.error(e)
+            return redirect(url_for('index.index'))
+
+    return decorated_func
+
+#课时管理装饰器，控制用户只能编辑自己课程的课时
+def self_required(f):
+    @wraps(f)
+    def decorated_func(*args, **kwargs):
+        try:
+            cid = request.base_url.split('/')[-1]
+
+            email = session['email']
+            user = users.query.filter(users.email == email).first()
+            c = course.query.filter(course.id == cid).first()
+
+            if c.user_id == user.id:
+                #如果是管理员用户，允许进入当前页面
+                return f(*args, **kwargs)
+            else:
+                #如果要进入的用户信息页面是当前登录用户的信息页，则重定向到用户的基本信息展示页面
+                return redirect(url_for('resouce_manage.course_manage'))
+        except Exception,e:
+            logging.error(e)
+            return redirect(url_for('resouce_manage.course_manage'))
+
+    return decorated_func

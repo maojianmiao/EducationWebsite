@@ -13,8 +13,10 @@
                         <a href="/index">首页 </a>
                         <span> > {{ category.category_name }}</span>
                     </div>
+                    <div class="category_pic"><img src="{{ category.page_pic}}"></div>
                 </div>
                 <div class="inx_course_view">
+                    {% if courses %}
                        {% for course in courses %}
                         <div class="inx_course_item" id="{{ course.id}}">
                             <a href="/course/{{ course.id }}" target="_blank">
@@ -30,6 +32,11 @@
                             </a>
                         </div>
                         {% endfor%}
+                    {% else%}
+                    <div class="no_content">
+                        很遗憾，暂无<span style="color:#00806E;"> {{ category.category_name }} </span>相关课程.....
+                    </div>
+                    {% endif %}
                 </div>
             
                 <div class="pageSelect contentPage">

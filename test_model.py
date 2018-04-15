@@ -83,7 +83,7 @@ def create_course():
     db_session.commit()
 
 def copy_course(cid, count):
-    c = course.query.filter(course.id == cid).first()
+    c = course.query.filter(course.status==1,course.id == cid).first()
 
     for i in xrange(2, count+2):
         copy_c = course(c.title, user_id=4, item_image=c.item_image)
@@ -120,6 +120,35 @@ def parse(textpath):
             db_session.add(current)
 
     db_session.commit()
+def add_category(name, pre_id=None):
+    #上一级分类的在category表里的id，如果是最大分类，则pre_id=None
+    pre = category.query.filter(category.id == pre_id).first()
+
+    c = category(name, level=pre.level + 1, pre_category_id=pre_id)
+    db_session.add(c)
+
+def op_add_category():
+    #文化艺术
+    cs = [u'绘画',u'声乐',u'乐器',u'书法']
+    #体育运动
+    pes = [u'足球',u'羽毛球',u'游泳',u'田径',u'篮球',u'乒乓球']
+    #生活方式
+    life = [u'烹饪',u'按摩',u'绿植',u'情绪管理',]
+    #职业发展
+    work = [u'项目管理',u'市场营销',u'职业考试',u'时间管理',]
+    #语言学习
+    lang = [u'英语',u'法语',u'潮州话',u'粤语',u'手语']
+    for i in cs:
+        add_category(i,1)
+    for i in pes:
+        add_category(i,3)
+    for i in life:
+        add_category(i,4)
+    for i in work:
+        add_category(i,6)
+    for i in lang:
+        add_category(i,5)
+
 
 #如果无数据库和表则创建数据和数据表，否则不影响现有库和表。
 if __name__ == "__main__":
@@ -127,7 +156,7 @@ if __name__ == "__main__":
     init_db()
     user_email = "010@linyuling.com"
     user = users.query.filter(users.email == user_email).first()
-    #user = users(email="admin22@linyuling.com",passward=hash_string("123123"),name="admin22")
+    #user = users(email="admin22@linyuling.com",password=hash_string("123123"),name="admin22")
     #user = change_email.query.filter(change_email.is_available=='1').order_by(desc(change_email.id)).first()
     #current = users.query.filter(users.id==1).first()
     #current.name = 'adminaa'
@@ -159,14 +188,31 @@ if __name__ == "__main__":
     #j = jitang(text, u'列宁')
     #db_session.add(j)
     #rate = course_rate(8.5, u"不错的一门课程", 2, 8)
-
+    #op_add_category()
     #db_session.add(rate)
-    db_session.commit()
+    #sql_order_query = video.query.filter(video.course_id == 20)
+    #print sql_order_query
+    #sql_order = sql_order_query.order_by(desc(video.id)).first()
+    #db_session.commit()
     #rates = course_rate.query.filter(course_rate.course_id == 8)\
     #.order_by(desc(course_rate.create_date)).slice(0, 5).all()
     #print rates
-    count = db_session.query(func.count(course.id)).first()[0]
-    print count
+    #count = db_session.query(func.count(course.id)).first()[0]
+    url = '/uploads/images/433bbde4a2981393faf3aae35329bd02c791a241.png'
+    for i in range(30):
+        c = course(u'测试课程'+str(i),item_image=url,description='ceshi')
+        db_session.add(c)
+
+
+    pre_id = 1
+    names =[u'地理',u'历史']
+    for name in names:
+        current = category(name,level=2,pre_category_id=pre_id)
+        db_session.add(current)
+    
+    db_session.commit()
+    #print count
+
     #item = u'Shell'
     #c = category(item,level=3,pre_category_id=7)
     #categorys = category.query.filter(category.level=='1').all()

@@ -244,7 +244,7 @@ def get_course(courseid):
     #当前课程信息
     current_course = course.query.filter(course.id == int(courseid)).first()
     #课程所有视频信息
-    lessons = video.query.filter(video.course_id == int(courseid)).all()
+    lessons = video.query.filter(video.course_id == int(courseid)).order_by(asc(video.order)).all()
 
     learners = db_session.query(func.count(user_to_course.id)).filter(user_to_course.course_id == courseid).first()
     rate_count = db_session.query(func.count(course_rate.id),func.sum(course_rate.score))\

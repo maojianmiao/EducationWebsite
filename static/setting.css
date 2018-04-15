@@ -13,12 +13,15 @@ html{
 a{
 text-decoration:none;
 }
-
+label{
+    cursor: text;
+}
  .setting{
+    position: relative;
     width: 1200px;
     margin:0px auto 0px auto;
     background-color: white;
-    position: relative;
+    overflow: hidden;
     top:60px;
  }
  a,button{
@@ -63,9 +66,8 @@ text-decoration:none;
     margin-top:10px;
 
 }
-
 #imgChange{
-    background-color: blue;
+    background-color: #00806E;
     width: 100px;
     height: 34px;
     color: white;
@@ -91,15 +93,13 @@ text-decoration:none;
 }
 
 #infoTextarea{
-    line-height: 20px;
-    font-size: 18px;
 }
 /* 联系邮箱信息部分功能按钮*/
 .pButton{
     width: 100px;
     height: 34px;
     line-height: 34px;
-    background-color: blue;
+    background-color: #00806E;
     color: white;
     font-size: 15px;
     border-style: none;
@@ -127,9 +127,13 @@ text-decoration:none;
 .footer{
     background-color: #fafafa;
     height:100px;
+    width: 1200px;
     /* 边界像素、样式、颜色*/
-    border:1px solid #eaeaea;
-    padding:30px 0 0 170px; 
+    border-top:1px solid #eaeaea;
+}
+.footer p{
+    margin-top: 25px;
+    margin-left: 170px;
 }
 
 #notice{
@@ -147,3 +151,27 @@ text-decoration:none;
     margin: 0px auto 0px auto;
 }
 
+.setting_nav{
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid lightgray;
+}
+.setting_nav_item{
+    height: 50px;
+    font-size: 20px;
+    line-height: 50px;
+    color: black;
+    padding: 0 15px 0 15px;
+}
+.setting_nav_item a{
+    margin-left: 10px;
+    font-size: 14px;
+    color: gray;
+}
+
+.hidden{
+    display: none;
+}
+a:hover{
+    color: lightseagreen;
+}

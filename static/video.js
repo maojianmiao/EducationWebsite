@@ -397,7 +397,10 @@ function addComment(){
 	video_id = findValue(pageRef, 'videoid');
 	var textarea = $("#commentText").val(); //获取评论内容
 
-
+	if (textarea.length<4){
+		alert('最少输入4个字符！');
+		return false;
+	}
 	var res = $.post('/add/comment',{
 		courseid:course_id,
 		videoid:video_id,
@@ -442,7 +445,10 @@ function addNote(){
 	video_id = findValue(pageRef, 'videoid');
 	var textarea = $("#noteText").val(); //获取笔记内容
 
-
+	if (textarea.length<4){
+		alert('最少输入4个字符！');
+		return false;
+	}
 	var res = $.post('/add/note',{
 		courseid:course_id,
 		videoid:video_id,

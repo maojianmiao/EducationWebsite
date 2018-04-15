@@ -1,0 +1,82 @@
+<div class="course_update">
+    <div class="close close_course_update f_right" onclick="close_low()">X</div>
+                <div class="course_edit">
+                    <div class="op_title" id="{{ course.id }}">编辑课程:{{ course.title }}</div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td class="warn_note warn_course_create"></td>
+                            </tr>
+                            <tr>
+                                <td class="title">课程分类</td>
+                                <td>
+                                    <select class="course_category" onchange="select_change()" for-data="{{category.category_id_first}}">
+                                        <option value="1">文化艺术</option>
+                                        <option value="2">编程开发</option>
+                                        <option value="3">体育运动</option>
+                                        <option value="4">生活方式</option>
+                                        <option value="5">语言学习</option>
+                                        <option value="6">职业发展</option>
+                                    </select>
+
+                                      <select class="sub_category" for-data="{% if category.category_id_second %}{{category.category_id_second}}{% else %}null{%endif%}">
+                                    </select>
+                                    <script type="text/javascript">
+                                        //加载的时候读取默认二级分类
+                                        category_id = $('.course_category').attr("for-data");
+                                        $.get('/subselect/' + category_id,function(data,status){
+                                            $('.sub_category').html(data);
+                                            $(".course_category").val($(".course_category").attr("for-data"));
+                                            var d = $(".sub_category").attr("for-data");
+                                            $(".sub_category").val(d);
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="title">课程名称</td>
+                                <td>
+                                <div class="input_area levelone">
+                                    <div class="f_left">
+                                        <input type="text" class="cm_elem c_info" name="course_title" value="{{ course.title }}">
+                                    </div>
+                                    <div class="warn_note f_left"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="title">预览图</td>
+                                <td>
+                                    <div class="img_area levelone">
+                                        <div class="img_display f_left">
+                                            <img id="headImg" src="{{ course.item_image }}">
+                                        </div>
+                                        <div class="img_upload f_left">
+                                            <div>支持640x360 JPG/PNG</div>
+                                            <div class="img_input">
+                                                <form enctype="form-data" id="upload" method="post">
+                                                <input type="file" name="fileUpload" id="fileInput" accept="image/png, image/jpeg, image/jpg" style="display: none">
+                                                <input type="button" value="添加图片" class="imgChange" onclick="uploadFile('fileInput')" />
+                                                </form>
+                                            </div>
+                                            <div class="warn_note"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="title"><div>课程介绍</div></td>
+                                <td>
+                                    <div class="levelone">
+                                        <div><textarea class="course_desc c_info">{{ course.description }}</textarea><div>
+                                    </div>  
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="couse_update_submit">
+                    <div class="course_btn_submit m_btn_submit" onclick="submit_course('/course/edit')">确 定</div>
+                </div></div>

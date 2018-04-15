@@ -1,0 +1,7 @@
+{% if courses %}
+<ul>
+    {% for course in courses%}
+    <li><a href="/course/{{ course.id }}" target='_self'>{{ course.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}

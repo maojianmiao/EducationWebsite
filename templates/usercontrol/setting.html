@@ -8,13 +8,15 @@
 <link rel="stylesheet" type="text/css" href="/static/setting.css"/>
 {%endblock%}
     {%block content%}
-    <div class="setting" id="{{ id }}">
+
+    <div class="setting" id="{{ id }}" >
+     <div class="setting_nav">
+            <div class="setting_base setting_nav_item">基本信息<a href="/password/change">修改密码>></a></div>
+
+        </div>
         <div class="edit">
         <table>
             <tbody>
-                <tr>
-                    <td><h2>个人信息</h2></td>
-                </tr>
                 <tr> 
                     <td class="title">
                         <em class="sign">*</em>
@@ -138,10 +140,10 @@
                     </tr>
             </tbody>
         </table>
-        </div>
-
-        <div class="footer">
+         <div class="footer">
             <p class="pButton" style="height: 40px;line-height: 40px" onclick="settingReq()">保存</p>
         </div>
+        </div>
+
     </div>
 {%endblock%}

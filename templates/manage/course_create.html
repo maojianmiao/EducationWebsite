@@ -1,21 +1,42 @@
-            <div class="course_update">
-                <div class="close close_course_update f_right">X</div>
+<div class="course_update">
+    <div class="close close_course_update f_right" onclick="close_low()">X</div>
                 <div class="course_edit">
+                    <div class="op_title">创建课程</div>
                     <table>
                         <tbody>
                             <tr>
-                                <td class="title"><h2>创建课程</h2></td>
-                            </tr>
-                            <tr>
                                 <td></td>
                                 <td class="warn_note warn_course_create"></td>
+                            </tr>
+                            <tr>
+                                <td class="title">课程分类</td>
+                                <td>
+                                    <select class="course_category" onchange="select_change()">
+                                        <option value="1">文化艺术</option>
+                                        <option value="2">编程开发</option>
+                                        <option value="3">体育运动</option>
+                                        <option value="4">生活方式</option>
+                                        <option value="5">语言学习</option>
+                                        <option value="6">职业发展</option>
+                                    </select>
+                                    <script type="text/javascript">
+                                        //加载的时候读取默认二级分类
+                                        category_id = $('.course_category').val();
+                                        $.get('/subselect/' + category_id,function(data,status){
+                                            console.log(data);
+                                        $('.sub_category').html(data);});
+                                    </script>
+                                      <select class="sub_category">
+                                    </select>
+                                    
+                                </td>
                             </tr>
                             <tr>
                                 <td class="title">课程名称</td>
                                 <td>
                                 <div class="input_area levelone">
                                     <div class="f_left">
-                                        <input type="text" class="cm_elem" name="course_title">
+                                        <input type="text" class="cm_elem c_info" name="course_title">
                                     </div>
                                     <div class="warn_note f_left"></div>
                                     </div>
@@ -26,7 +47,7 @@
                                 <td>
                                     <div class="img_area levelone">
                                         <div class="img_display f_left">
-                                            <img id="headImg" width="160px" height="90px">
+                                            <img id="headImg">
                                         </div>
                                         <div class="img_upload f_left">
                                             <div>支持640x360 JPG/PNG</div>
@@ -45,7 +66,7 @@
                                 <td class="title"><div>课程介绍</div></td>
                                 <td>
                                     <div class="levelone">
-                                        <div><textarea class="course_desc"></textarea><div>
+                                        <div><textarea class="course_desc c_info"></textarea><div>
                                     </div>  
                                 </td>
 
@@ -54,6 +75,5 @@
                     </table>
                 </div>
                 <div class="couse_update_submit">
-                    <div class="course_btn_submit">确 定</div>
-                </div>
-            </div>
+                    <div class="course_btn_submit m_btn_submit" onclick="submit_course('/course/new')">确 定</div>
+                </div></div>

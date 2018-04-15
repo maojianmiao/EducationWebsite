@@ -1,6 +1,6 @@
 {% extends "base.html"%}
 {%block title%}
-资料设置
+课时管理
 {%endblock%}
     <!-- href="/static/style.css" 表示网站根目录下的文件 -->
     <!-- href="static/style.css" 表示网站当前域名下的文件，比如当前域名是127.0.0.1/test/login/, 网页检索静态文件是的域名将会是127.0.0.1/test/login/static/style.css。所以当要引用根目录下的静态文件时，href前的单斜杠是必须要的 -->
@@ -11,17 +11,27 @@
     <div id="allcontent">
         <div class="course_manage">
             <div class="manage_info center">
-                <div class="manage_info_title f_left">我的课程</div>
-                <div class="manage_info_desc f_left">欢迎上传课程与人分享！送人玫瑰，手有余香~</div>
+                <div class="mi_nav"><a href="/course/manage">我的课程</a> > 课时管理</div>
+
+                <div class="item_image f_left">
+                    <div class="ii_image f_left"><img src="{{ course.item_image}}"></div>
+                    <div style="overflow: hidden;line-height: 30px;">
+                        <div class="lesson_info_title f_left" id={{ course.id}}>课程名：{{course.title}}</div>
+                        <div class="course_status f_right">状态：{{ course.get_status_text() }}</div>
+                    </div>
+                    <div style="line-height: 14px;"><span style="color:red;font-size: 12px;"> 注意：请勿上传黄色、暴力、反党、反人类、盗版、非教育类等违法乱纪内容</span></div>
+                    <hr>
+                    <div class="c_desc f_left">课程介绍：<br>{{ course.description}}</div>
+                </div>
+                    
             </div>
             <div id="content_center" class="center">
                     <div class="manage_nav">
                         <div class="manage_menu">
                              <ul>
-                                <li><a href="#">新建</a></li>
-                                <li><a href="#">提交审核</a></li>
-                                <li><a href="#">编辑</a></li>
-                                <li><a href="#">删除</a></li>
+                                <li class="m_create" onclick="create('/lesson/new')">新建</a></li>
+                                <li class="v_edit">编辑</li>
+                                <li class="mv_delete" onclick="deleteLesson('/lesson/del')">删除</li>
                             </ul>
                             </div>
                 </div>
@@ -29,86 +39,36 @@
                     <div class="course_table">
                         <table>
                             <tr class="tr_title">
-                                <th class="td_checkbox"><input type="checkbox" name="all"></th>
-                                 <td>序号</td>
-                                <td>视频名称</td>
-                                <td>视频描述</td>
-                                <td>视频地址</td>
-                                <td>视频时长</td>
-                                <td>创建者</td>
-                                <td>上传时间</td>
-                                <td>状态</td>
+                                <th class="td_checkbox"><input type="checkbox" name="all_check" class="all_check"></th>
+                                 <th class="td_title">序号</th>
+                                <th class="td_title">视频名称</th>
+                                <th class="td_title">视频描述</th>
+                                <th class="td_title">视频地址</th>
+                                <th class="td_title">视频时长</th>
+                                <th class="td_title">创建者</th>
+                                <th class="td_title">上传时间</th>
                             </tr>
+                            {% for lesson in lessons %}
                             <tr>
-                                <td><input type="checkbox" name="item"></td>
-                                <td>序号</td>
-                                <td>视频名称</td>
-                                <td>视频描述</td>
-                                <td>视频地址</td>
-                                <td>视频时长</td>
-                                <td>创建者</td>
-                                <td>上传时间</td>
-                                <td>状态</td>
+                                <td><input type="checkbox" name="item_{{ lesson.id }}" value="{{ lesson.id}}" class="single_check" value="{{ lesson.id}}"></td>
+                                <td>{{ lesson.order }}</td>
+                                <td>{{ lesson.title }}</td>
+                                <td><div class="desc">{{ lesson.description }}</div></td>
+                                <td>{{ lesson.video_url }}</td>
+                                <td>{{ lesson.duration }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{ lesson.get_status_text() }}</td>
+                                <td>{{ lesson.str_create_date }}</td>
                             </tr>
+                            {% endfor %}
                         </table>
                     </div>
                 </div>
             </div>
         </div>
         <div class="low_layer for_close">
-            <div class="course_update">
-                <div class="close close_course_update f_right">X</div>
-                <div class="course_edit">
-                    <table>
-                        <tbody>
-                            <tr><td class="title"><h2>创建课程</h2></td></tr>
-                            <tr>
-                                <td class="title">课程名称</td>
-                                <td>
-                                <div class="input_area levelone">
-                                    <div class="f_left">
-                                        <input type="text" class="cm_elem" name="course_title">
-                                    </div>
-                                    <div class="warn_note f_left"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="title">预览图</td>
-                                <td>
-                                    <div class="img_area levelone">
-                                        <div class="img_display f_left">
-                                            <img id="headImg" width="160px" height="90px">
-                                        </div>
-                                        <div class="img_upload f_left">
-                                            <div>支持640x360 JPG/PNG</div>
-                                            <div class="img_input">
-                                                <form enctype="form-data" id="upload" method="post">
-                                                <input type="file" name="fileUpload" id="fileInput" accept="image/png, image/jpeg, image/jpg" style="display: none">
-                                                <input type="button" value="添加图片" class="imgChange" onclick="uploadFile('fileInput')" />
-                                                </form>
-                                            </div>
-                                            <div class="warn_note"></div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="title"><div>课程介绍</div></td>
-                                <td>
-                                    <div class="levelone">
-                                        <div><textarea>按实际的痕迹爱神的箭</textarea><div>
-                                    </div>  
-                                </td>
+            
 
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="couse_update_submit">
-                    <div class="course_btn_submit">确 定</div>
-                </div>
-            </div>
         </div>
     </div>
 {%endblock%}

@@ -1,0 +1,6 @@
+{% if subs %}
+    {% for sub in subs %}
+    <option value="{{sub.id}}"> {{ sub.category_name }}</option>
+    {% endfor %}
+{% endif %}
+<option value="null">未定义</option>

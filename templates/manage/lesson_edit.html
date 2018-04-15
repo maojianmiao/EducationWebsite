@@ -1,0 +1,61 @@
+<div class="course_update">
+                <div class="close close_course_update f_right"  onclick="close_low()">X</div>
+                <div class="course_edit">
+                    <div class="op_title" id={{ course.id }}>编辑：{{ lesson.title }}</div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td class="warn_note warn_course_create"></td>
+                            </tr>
+                            <tr>
+                                <td class="title" id="{{ lesson.id }}">课时名称</td>
+                                <td>
+                                <div class="input_area levelone">
+                                    <div class="f_left">
+                                        <input type="text" class="cm_elem c_info" name="course_title" value="{{ lesson.title }}">
+                                    </div>
+                                    <div class="warn_note f_left"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="title">预览</td>
+                                <td>
+                                    <div class="img_area levelone">
+                                        <div class="img_display f_left">
+                                            <video id="headImg" class="v_create" type="video/mp4" controls="controls" src="{{ lesson.video_url }}"></video>
+                                        </div>
+                                        <div class="img_upload f_left">
+                                            <div>仅支持1G以内的MP4文件</div>
+                                            <div class="img_input">
+                                                <form enctype="form-data" id="upload" method="post">
+                                                <input type="file" name="fileUpload" id="fileInput" accept="video/mp4" style="display: none">
+                                                <input type="button" value="添加视频" class="imgChange" onclick="uploadVideo('fileInput')" />
+                                                
+                                                </form>
+                                            </div>
+                                            <div>
+                                                <div class="progress_text"></div>
+                                            </div>
+                                            <div class="warn_note"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="title"><div>课时介绍</div></td>
+                                <td>
+                                    <div class="levelone">
+                                        <div><textarea class="course_desc c_info">{{lesson.description}}</textarea><div>
+                                    </div>  
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="couse_update_submit">
+                    <div class="m_btn_submit video_btn_submit" onclick="submit_video('/lesson/edit')">确 定</div>
+                </div>
+            </div>

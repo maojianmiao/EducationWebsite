@@ -16,11 +16,12 @@ class category(Base):
 
     id = Column(Integer,primary_key=True)
     category_name = Column(String(14),index=True, primary_key=True) #分类名
-    level = Column(String(1))#分类级别：1、2、3、4
+    level = Column(Integer)#分类级别：1、2、3、4
     views = Column(Integer) #频道vv统计
     pre_category_id = Column(Integer) #上级标签id
+    page_pic = Column(String(200))#进入当前分类页面时显示顶部大图图片地址
 
-    def __init__(self,category_name, level=None,views=0,pre_category_id=None):
+    def __init__(self,category_name=None, level=None,views=0,pre_category_id=None):
         self.category_name = category_name
         self.level = level
         self.views = views

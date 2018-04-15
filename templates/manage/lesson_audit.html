@@ -1,0 +1,72 @@
+{% extends "base.html"%}
+{%block title%}
+课时管理
+{%endblock%}
+    <!-- href="/static/style.css" 表示网站根目录下的文件 -->
+    <!-- href="static/style.css" 表示网站当前域名下的文件，比如当前域名是127.0.0.1/test/login/, 网页检索静态文件是的域名将会是127.0.0.1/test/login/static/style.css。所以当要引用根目录下的静态文件时，href前的单斜杠是必须要的 -->
+{%block stylesheet%}
+<link rel="stylesheet" type="text/css" href=""/>
+{%endblock%}
+{%block content%}
+    <div id="allcontent">
+        <div class="course_manage">
+            <div class="manage_info center">
+                <div class="mi_nav"><a href="/course/admin/audit">课程列表</a> > 课时管理</div>
+                <div class="item_image f_left">
+                    <div class="ii_image f_left"><img src="{{ course.item_image}}"></div>
+                    <div style="overflow: hidden;line-height: 30px;">
+                        <div class="lesson_info_title f_left" id={{ course.id}}>课程名：{{course.title}}</div>
+                        <div class="course_status f_right">状态：{{ course.get_status_text() }}</div>
+                    </div>
+                    <hr>
+                    <div class="c_desc f_left">课程介绍：<br>{{ course.description}}</div>
+                </div>
+                    
+            </div>
+            <div id="content_center" class="center">
+                    <div class="manage_nav">
+                        <div class="manage_menu">
+                             <ul>
+                                <li class="audit_pass">审核通过</a></li>
+                                <li class="audit_refuse">审核驳回</li>
+                            </ul>
+                            </div>
+                </div>
+                <div class="course_display">
+                    <div class="course_table">
+                        <table>
+                            <tr class="tr_title">
+                                 <th class="td_title">序号</th>
+                                <th class="td_title">视频名称</th>
+                                <th class="td_title">视频描述</th>
+                                <th class="td_title">视频地址</th>
+                                <th class="td_title">视频时长</th>
+                                <th class="td_title">创建者</th>
+                                <th class="td_title">状态</th>
+                                <th class="td_title">上传时间</th>
+                            </tr>
+                            {% for lesson in lessons %}
+                            <tr>
+                                <td>{{ lesson.order }}</td>
+                                <td>{{ lesson.title }}</td>
+                                <td><div class="desc">{{ lesson.description }}</div></td>
+                                <td><div class="img_display f_left">
+                                            <video id="headImg" class="v_create" type="video/mp4" controls="controls" src="{{ lesson.video_url }}"></video>
+                                        </div></td>
+                                <td>{{ lesson.duration }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{ lesson.get_status_text() }}</td>
+                                <td>{{ lesson.str_create_date }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="low_layer for_close">
+            
+
+        </div>
+    </div>
+{%endblock%}

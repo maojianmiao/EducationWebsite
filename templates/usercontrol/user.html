@@ -9,11 +9,17 @@
 {%endblock%}
 {%block content%}
     <div id="allcontent">
-        <div id="content_center" class="center" style="text-align: center;height: 250px;background-color: lavender">
-            <a href="{{ setting }}" >
-                <img src="{{ user.head_pic }}" style="width:100px;height:100px;"></img>
-            </a>
-            <p>{{ user.desc }}</p>
+        <div id="content_center" class="center user_base">
+            <div class="user_base_info">
+                <div class="ub_head">
+                    <a href="{{ setting }}" >
+                        <img src="{{ user.head_pic }}" style="width:100px;height:100px;"></img>
+                    </a>
+                </div>
+                <p>{% if user.desc %}{{ user.desc }}{% endif %}</p>
+            </div>
+            <div class="user_other">
+            </div>
         </div>
     </div>
 {%endblock%}

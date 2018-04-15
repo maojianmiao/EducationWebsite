@@ -15,6 +15,7 @@ class sitemail(object):
     def __init__(self):
         self.msg_from = 'flaskadmin010@163.com'     #发送方邮件
         self.passwd = 'flaskadmin010'   #授权码
+        #授权码和密码不是一个。密码：010010
         self.smtpserver = "smtp.163.com"
         self.timeout = 20       #登录超时时间
 

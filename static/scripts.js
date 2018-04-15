@@ -84,60 +84,82 @@ $(document).ready(function(){
               $('.btn_add_collect').addClass('added');
           });}
     });
-    $('.head_pic').mouseover(function(){
-        $('.hide').css('display','block');
-    });
-    
-    $('.hide').mouseleave(function(){
-        $('.hide').css('display','none');
-    });
-    //点击关闭按钮
-    $('.close').click(function(){
-        $('.for_close').css('z-index','-999');
+    //渲染导航“所有课程”的下拉菜单
+    $.get("/menu",function(data,status){
+        $(".ac_menu").html(data);
     });
 
-    //新建课程
-    $('.new_course').click(function(){
-        $('.for_close').css('z-index','999');
-    });
 
-    $('.course_btn_submit').click(function(){
-      course_name = $('input[name="course_title"]').val();
-      course_item_image = $('#headImg').attr('src');
-      course_desc = $('.course_desc').val();
-
-      if (course_name<4 || course_name.length>20){
-          $('.warn_course_create').html("课程名必须在4至20字符之间");
-          return false;
-      }
-      else if (!course_item_image){
-          $('.warn_course_create').html("请上传课程预览图片！");
-          return false;
-      }
-
-      else if (!course_desc){
-        $('.warn_course_create').html("请添加课程描述，方便更多人学习它！");
-         return false;
+     
+    $('.all_check').click(function(){
+      elems = $('.single_check')
+      if (this.checked == true){
+        for (var i in elems){
+          elems[i].checked = true;
+        }
       }
       else{
-      $.post('/course/new',{
-        course_title: course_name,
-        pic:course_item_image,
-        desc:course_desc
-      },
-      function(data,status){
-        if (data !='success'){
-          $('.warn_course_create').html(data);
+        for (var i in elems){
+          elems[i].checked = false;
+        }
+      }});
+
+    $('.m_edit').click(function(){
+        var elems = $('.single_check:checked');
+        if (elems.length>1){
+          alert("一次只能编辑一个项目");
           return false;
         }
-        else{
-          $('.for_close').css('z-index','-999');
-          $('.c_info').val('');
-          $('#headImg').removeAttr('src');
+        if (elems.length==0){
+          alert("请选择一个要编辑的项目");
+          return false;
         }
-      });}
+        $('.for_close').css('z-index','999');
+        $.get('/course/edit?course_id=' + elems[0].value,function(data, status){
+          if (status == "success"){
+            $('.for_close').html(data);
+          }
+        });
     });
-  }); // end of document
+
+    $('.v_edit').click(function(){
+        var elems = $('.single_check:checked');
+        if (elems.length>1){
+          alert("一次只能编辑一个项目");
+          return false;
+        }
+        if (elems.length==0){
+          alert("请选择一个要编辑的项目");
+          return false;
+        }
+        $('.for_close').css('z-index','999');
+        $.get('/lesson/edit?vid=' + elems[0].value,function(data, status){
+          if (status == "success"){
+            $('.for_close').html(data);
+          }
+        });
+    });
+
+    //用户搜索时根据输入的字符，动态推荐一些课程
+    $('#search_text').keyup(function(){
+      text = $(this).val();
+      if (!text){
+          $('.search_help').html('');
+          console.log('空字符串');
+          return false;
+      }
+
+      $.get('/input/refer?text=' + text,function(data,status){
+        if (status=='success' && data){
+          $('.search_help').html(data);
+        }
+        else{
+          $('.search_help').html('');
+        }
+      });
+    });
+
+}); // end of document
 
 
 function getXmlhttp(){
@@ -255,15 +277,23 @@ function getAuthCode(id)
   console.log('get auth code');
   document.getElementById('login_input_note').innerHTML = "";
   $('.input_note').removeClass('warning_note');
+  msg = validateEmail('username');
   /*倒计时的时候不可点击*/
-if (document.getElementById(id).innerHTML.lastIndexOf("秒") > -1){ 
+  if (document.getElementById(id).innerHTML.lastIndexOf("秒") > -1){ 
     console.log("false");
     return false;
+  }
+  //验证邮箱输入
+  if (msg){
+    document.getElementById('login_input_note').innerHTML = msg
+    $('.input_note').addClass('warning_note');
+    return false
   }
   var str = document.getElementById("username").value;
   confirmSign = checkEmail(str);
   console.log(confirmSign);
 
+  
   if (!confirmSign){
       document.getElementById('login_input_note').innerHTML = "此邮箱已被注册！";
       $('.input_note').addClass('warning_note');
@@ -281,8 +311,6 @@ if (document.getElementById(id).innerHTML.lastIndexOf("秒") > -1){
     
     }
   }
-  
-    
     xmlhttp.open("GET","/auth_code?username="+str,true);
     xmlhttp.send();
 }
@@ -312,6 +340,14 @@ function uploadFile(id){
   }
 }
 
+function uploadVideo(id){
+  var elem = document.getElementById(id)
+  elem.click()
+  elem.onchange=function(){
+    //_upload(id,"/new/upload");
+    _upload_ajax(id,"/new/upload");
+  }
+}
 function _upload(id, url){
 
   var form = document.getElementById('upload');
@@ -327,14 +363,46 @@ function _upload(id, url){
       {
          console.log("xmlhttp.responseText");
         console.log(xmlhttp.responseText);
-        imgElem = document.getElementById("headImg")
-        imgElem.src = xmlhttp.responseText
+        imgElem = document.getElementById("headImg");
+        imgElem.src = xmlhttp.responseText;
       }
     }
   xmlhttp.open("post",url,true);
   xmlhttp.send(formData);
   }
 
+function _upload_ajax(id,url){
+  var form = document.getElementById('upload');
+  formData = new FormData(form); 
+  var xmlhttp = getXmlhttp();
+
+  formData.append("uplaod",1);
+  formData.append(id, document.getElementById(id).files[0]);
+  xmlhttp.upload.onprogress=function(e){
+    onprogress(e);
+  }
+
+  xmlhttp.onreadystatechange=function()
+    {
+     if (xmlhttp.readyState==4 && xmlhttp.status==200)
+      {
+         console.log("xmlhttp.responseText");
+        console.log(xmlhttp.responseText);
+        imgElem = document.getElementById("headImg");
+        imgElem.src = xmlhttp.responseText;
+      }
+    }
+  xmlhttp.open("post",url,true);
+  xmlhttp.send(formData);
+
+}
+
+function onprogress(evt){
+     var loaded = evt.loaded;   //已经上传大小情况 
+     var tot = evt.total;   //附件总大小 
+     var per = Math.floor(100*loaded/tot); //已经上传的百分比 
+     $(".progress_text").text("进度："+ per +"%");
+};
 function onChangeControl(labelid){
 
     value = document.getElementById("infoTextarea").innerHTML;
@@ -787,3 +855,357 @@ function renderRecord(){
     }
     console.log('renderRecord finished');
 }
+
+function getAuthCodeNoSignCheck(id)
+{
+  console.log('get auth code');
+  document.getElementById('login_input_note').innerHTML = "";
+  $('.input_note').removeClass('warning_note');
+  msg = validateEmail('username');
+  var str = document.getElementById("username").value;
+  /*倒计时的时候不可点击*/
+  if (document.getElementById(id).innerHTML.lastIndexOf("秒") > -1){ 
+    console.log("false");
+    return false;
+  }
+  //验证邮箱输入
+  if (msg){
+    document.getElementById('login_input_note').innerHTML = msg
+    $('.input_note').addClass('warning_note');
+    return false
+  }
+
+  xmlhttp = getXmlhttp();
+
+  xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    count(60,id);
+    
+    }
+  }
+    xmlhttp.open("GET","/auth_code?username="+str,true);
+    xmlhttp.send();
+}
+
+function validate_find(){
+    var msg = validateEmail('username');
+    var auth_code = document.getElementById("input_auth_code").value;
+    var email = document.getElementById('username').value;
+    if (msg){
+        document.getElementById('login_input_note').innerHTML = msg;
+        $('.input_note').addClass('warning_note');
+        return false;
+      }
+
+    else if(auth_code.search("^[a-zA-Z0-9]{4,5}$") <0 ){
+        console.log("请输入有效的验证码");
+        $('.input_note').html("请输入有效的验证码");
+        $('.input_note').addClass('warning_note');
+        return false;
+    }
+
+    else{
+      return true;
+  }
+}
+
+function validate_reset(){
+
+  var passwd = document.getElementById("passwd").value;
+  var passwd2 = document.getElementById("passwd2").value;
+
+  if(passwd.length<6 || passwd.length >24){
+      $('.input_note').html("密码必须是6至24位字符");
+      $('.input_note').addClass('warning_note');
+      return false;
+  }
+  else if(passwd != passwd2){
+      $('.input_note').html("两次输入的密码不相等");
+      $('.input_note').addClass('warning_note');
+      return false;
+  }
+  else{
+    return true;
+  }
+}
+
+
+function validate_change(){
+  var passwd0 = document.getElementById("passwd0").value;
+  var passwd = document.getElementById("passwd").value;
+  var passwd2 = document.getElementById("passwd2").value;
+  
+  if(passwd0.length<6 || passwd0.length >24){
+      $('.input_note').html("密码必须是6至24位字符");
+      $('.input_note').addClass('warning_note');
+      return false;
+  }
+
+  if(passwd.length<6 || passwd.length >24){
+      $('.input_note').html("密码必须是6至24位字符");
+      $('.input_note').addClass('warning_note');
+      return false;
+  }
+  else if(passwd != passwd2){
+      $('.input_note').html("两次输入的密码不相等");
+      $('.input_note').addClass('warning_note');
+      return false;
+  }
+  else{
+    return true;
+  }
+}
+
+function deleteItems(url){
+  var elems = $('.single_check:checked');
+  var items = '';
+  if (elems.length == 0){
+    alert("请至少选择一个要删除的项目！");
+    return false;
+  }
+
+  for (i=0; i<elems.length;i ++){
+    items += ',' + elems[i].value;
+    c_status = $('#' + 'status_' + elems[i].value).attr("value");
+    if (c_status != 0){
+      alert("只能删除未审核状态的项目");
+      return false
+    }
+  }
+
+  console.log(items);
+  var r =confirm("确认删除选中的项目？");
+  if (r == true){
+    $.post(url,{
+      items:items,
+    },function(data,status){
+      if (status == "success" && data=="success"){
+        alert("删除成功！")
+        //刷新页面
+        window.location.reload(true);
+      }
+      else{
+        alert("删除失败！");
+      }
+    });
+  }
+  else{
+    return false;
+  }
+
+}
+
+function deleteLesson(url){
+  var elems = $('.single_check:checked');
+  var items = '';
+  cid = $('.manage_info_title').attr('id');
+  if (elems.length == 0){
+    alert("请至少选择一个要删除的项目！");
+    return false;
+  }
+
+  for (i=0; i<elems.length;i ++){
+    items += ',' + elems[i].value;
+  }
+
+  console.log(items);
+  var r =confirm("确认删除选中的项目？");
+  if (r == true){
+    $.post(url,{
+      items:items,
+      cid:cid,
+    },function(data,status){
+      if (status == "success" && data=="success"){
+        alert("已提交删除申请, 需要审核！");
+        window.location.reload(true);
+        return true
+      }
+      else{
+        alert("删除失败！");
+        return false
+      }
+    });
+  }
+  else{
+    return false;
+  }
+
+}
+
+ function submit_course(url){
+      course_name = $('input[name="course_title"]').val();
+      course_item_image = $('#headImg').attr('src');
+      course_desc = $('.course_desc').val();
+      category_id = $('.course_category').val();
+      sub_id = $('.sub_category').val();
+      course_id = $('.op_title').attr('id');
+      if (course_name<4 || course_name.length>20){
+          $('.warn_course_create').html("课程名必须在4至20字符之间");
+          return false;
+      }
+      else if (!course_item_image){
+          $('.warn_course_create').html("请上传课程预览图片！");
+          return false;
+      }
+
+      else if (!course_desc){
+        $('.warn_course_create').html("请添加课程描述，方便更多人学习它！");
+         return false;
+      }
+      else{
+      $.post(url,{
+        course_title: course_name,
+        pic:course_item_image,
+        desc:course_desc,
+        category_id:category_id,
+        sub_id:sub_id,
+        course_id:course_id,
+      },
+      function(data,status){
+        if (data !='success'){
+          $('.warn_course_create').html(data);
+          return false;
+        }
+        else{
+          $('.for_close').css('z-index','-999');
+          window.location.reload(true);
+        }
+      });}
+    }
+
+      //点击关闭按钮
+function close_low(){
+      $('.for_close').css('z-index','-999');
+    }
+
+function select_change(){
+      category_id = $('.course_category').val();
+
+      $.get('/subselect/' + category_id,function(data,status){
+        $('.sub_category').html(data);
+});}
+
+
+//新建课程，课时
+function create(url){
+        $('.for_close').css('z-index','999');
+        $.get(url,function(data, status){
+          if (status == "success"){
+            $('.for_close').html(data);
+          }
+        });
+    }
+//提交课时信息
+function submit_video(url){
+      course_name = $('input[name="course_title"]').val();
+      course_item_image = $('#headImg').attr('src');
+      course_desc = $('.course_desc').val();
+      course_id = $(".op_title").attr('id');
+      duration = $(".v_create")[0].duration;
+      vid = $('.title').attr('id');
+      if (course_name<4 || course_name.length>20){
+          $('.warn_course_create').html("课时名必须在4至20字符之间");
+          return false;
+      }
+      else if (!course_item_image){
+          $('.warn_course_create').html("请上课时视频！");
+          return false;
+      }
+
+      else if (!course_desc){
+        $('.warn_course_create').html("请添加课时描述，方便更多人学习它！");
+         return false;
+      }
+      else{
+      $.post(url,{
+        video_title: course_name,
+        video_url:course_item_image,
+        desc:course_desc,
+        course_id:course_id,
+        duration:duration,
+        vid:vid,
+      },
+      function(data,status){
+        if (data !='success'){
+          $('.warn_course_create').html(data);
+          return false;
+        }
+        else{
+          $('.for_close').css('z-index','-999');
+          $('.c_info').val('');
+          $('#headImg').removeAttr('src');
+          window.location.reload(true);
+        }
+      });}
+    }
+
+function audit(url){
+        var elems = $('.single_check:checked');
+        var items = '';
+        if (elems.length == 0){
+              alert("请至少选择一个审核的项目！");
+              return false;
+        }
+
+        for (i=0; i<elems.length;i ++){
+              
+              c_status = $('#' + 'status_' + elems[i].value).attr("value");
+              if (c_status == 1 || c_status == 2){
+                    alert("不要重复提交已审核或审核中的项目！");
+                    return false
+                }
+              items += ',' + elems[i].value;
+              }
+        console.log(items);
+        var r =confirm("确认提交审核选中的项目？");
+        if (r == true){
+        $.post(url,{
+            items:items,
+          },function(data,status){
+            if (status == "success" && data=="success"){
+              alert("提交成功！");
+              window.location.reload(true);
+            }
+          else{
+            alert("提交失败！");
+            }
+           });
+          }
+        else{
+            return false;
+}}
+
+function f_audit(url){
+        var elems = $('.single_check:checked');
+        var items = '';
+        if (elems.length == 0){
+              alert("请至少选择一个审核的项目！");
+              return false;
+        }
+
+        for (i=0; i<elems.length;i ++){
+              c_status = $('#' + 'status_' + elems[i].value).attr("value");
+              items += ',' + elems[i].value;
+              }
+        console.log(items);
+        var r =confirm("确认审核通过选中的项目？");
+        if (r == true){
+        $.post(url,{
+            items:items,
+          },function(data,status){
+            if (status == "success" && data=="success"){
+              alert("审核成功！");
+              window.location.reload(true);
+            }
+          else{
+            alert("审核失败！");
+            }
+           });
+          }
+        else{
+            return false;
+}}
+
+

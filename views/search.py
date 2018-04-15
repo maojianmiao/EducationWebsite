@@ -25,9 +25,9 @@ def search():
     text = unquote(request.args.get('text'))
     logging.info(text)
     if c_type == 'course':
-        courses = course.query.filter(course.title.like(u'%{}%'.format(text))).all()
+        courses = course.query.filter(course.status==1,course.title.like(u'%{}%'.format(text))).all()
     else:
-        courses = course.query.join(users, course.user_id == users.id).filter(users.name.like(u'%{}%'.format(text))).all()
+        courses = course.query.join(users, course.user_id == users.id).filter(course.status==1,users.name.like(u'%{}%'.format(text))).all()
 
     logging.info(courses)
     course_count = len(courses)
@@ -36,9 +36,12 @@ def search():
 
 @page.route('/input/refer')
 def input_refer():
-    c_type = request.args.get('type')
     text = unquote(request.args.get('text'))
-    if c_type == 'course':
-        courses = course.query.filter(course.title.like(u'%{}%'.format(text))).all()
-    else:
-        courses = course.query.join(users, course.user_id == users.id).filter(users.name.like(u'%{}%'.format(text))).all()
+    items = 6 #一次最多返回多少个提示
+    if not text:
+        return ''
+    courses = course.query.filter(course.status==1,course.title.like(u'%{}%'.format(text))).order_by(desc(course.view)).slice(0,items).all()
+    if not courses:
+        return ''
+    return render_template('search/refer.html',courses=courses)
+

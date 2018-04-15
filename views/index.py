@@ -27,13 +27,13 @@ def index():
     except:
         username = None
 
-    categorys = category.query.filter(category.level=='1').all()
+    categorys = category.query.filter(category.level==1).all()
     #logging.info(categorys)
     for item in categorys:
         
         item.courses = course.query.join(category_to_course, category_to_course.course_id == course.id).\
-        filter(category_to_course.category_id_first == item.id).slice(0,8).all()
-        logging.info(item.courses)
+        filter(category_to_course.category_id_first == item.id,course.status==1).slice(0,8).all()
+        #logging.info(item.courses)
         for c in item.courses:
             c.user = users.query.filter(users.id == c.user_id).first()
 
@@ -132,22 +132,30 @@ def get_all_course():
 
 def get_courses(page_id, category_id=None, items=30):
     if not category_id:
-        courses = course.query.filter().order_by(desc(course.create_date)).slice(page_id*items - items, page_id *items).all()
+        courses = course.query.filter(course.status==1).order_by(desc(course.create_date)).slice(page_id*items - items, page_id *items).all()
 
     else:
         courses = course.query.join(category_to_course, category_to_course.course_id == course.id)\
-        .filter(category_to_course.category_id_first==category_id).order_by(desc(course.create_date)).slice(page_id*items - items, page_id *items).all()
+        .filter(category_to_course.category_id_first==category_id,course.status==1).order_by(desc(course.create_date)).slice(page_id*items - items, page_id *items).all()
 
     logging.info(len(courses))
     return courses
 
 def get_course_count(category_id=None):
     if not category_id:
-        count = db_session.query(func.count(course.id)).first()[0]
+        count = db_session.query(func.count(course.id)).filter(course.status==1).first()[0]
     else:
         count = db_session.query(func.count(course.id)).join(category_to_course, category_to_course.category_id_first == course.id)\
-        .filter(category_to_course.category_id_first==category_id).first()[0]
+        .filter(category_to_course.category_id_first==category_id,course.status==1).first()[0]
 
     logging.info('category id: %s course count: %s', category_id, count)
     return count
+
+@page.route('/menu')
+def ul_menu():
+    categorys = category.query.filter(category.level == 1).all()
+    for item in categorys:
+        item.subs = category.query.filter(category.pre_category_id == item.id).all()
+
+    return render_template('index/ul_menu.html',categorys=categorys)
 

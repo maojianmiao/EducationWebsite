@@ -16,6 +16,7 @@ from models.change_email import change_email
 from models.jitang import jitang
 from models.__init__ import db_session
 from sqlalchemy import asc,desc
+from urllib import unquote
 from _decorator import login_required,self_login_required
 import logging
 import random
@@ -34,15 +35,21 @@ def signin():
         passwd = request.form.get('passwd')
 
         current = users.query.filter_by(email=username).first()
+        logging.info(username)
         if not current:
             return render_template('usercontrol/login.html',msg="账号不存在，请重新输入！")
 
 
-        if username == current.email and hash_string(passwd) == current.passward:
+        if username == current.email and hash_string(passwd) == current.password:
             session['username'] = current.name
             session['email'] = username
             session['userid'] = current.id
             session['head_pic'] = current.head_pic
+            session['level'] = current.level
+            try:
+                del session[username]
+            except:
+                pass
             return redirect(url_for("index.index"))
         else:
             return render_template('usercontrol/login.html',msg="输入的账号或密码不正确！")
@@ -71,7 +78,7 @@ def signup():
         try:
             code = escape(session[username])
         except:
-            code = 'fakecode'
+            code = None
             
         if auth_code != code:
             return render_template('usercontrol/signup.html',msg="验证码错误！")
@@ -86,7 +93,13 @@ def signup():
         session['username'] = default_name
         session['email'] = username
         session['userid'] = new.id
+        session['level'] = 9
         logging.info(new.id)
+        try:
+            #删除写入session的注册验证码
+            del session[username]
+        except:
+            pass
         return redirect(url_for("index.index"))
 
     return render_template('usercontrol/signup.html',msg='')
@@ -98,6 +111,7 @@ def logout():
         session.pop('username', None)
         session.pop('head_pic', None)
         session.pop('email', None)
+        session.pop('level',None)
         return redirect(url_for("usercontrol.signin"))
     except Exception,e:
         logging.error(e)
@@ -119,10 +133,10 @@ def get_auth_code():
 
         status = g.mail_server.send(mail_to,title, content)
         if status:
-            #在浏览器写一个key为邮箱，值为验证码的session
+            #在session写一个key为邮箱，值为验证码值
             #后面验证直接用session
             session[mail_to] = code
-            logging.info(escape(session[mail_to]))
+            logging.info('g verify code: %s mail is: %s',getattr(g,mail_to,None), mail_to)
             return hash_string(code)
 
 
@@ -272,8 +286,13 @@ def activate():
     change = change_email.query.filter_by(id=int(d['changeid'])).first()
     if change.is_activated == '1':
         return render_template('usercontrol/notice.html',msg=u'邮箱已激活！')
+    
+    try:
+        s = session['email']
+        session['email'] = d['email']
+    except:
+        pass
     #修改用户主表的登录邮箱账号
-    session['email'] = d['email']
     user.email = d['email']
     #邮箱激活后，把change_email表的数据处理下
     change.is_available = '0' #废弃这条数据
@@ -296,7 +315,7 @@ def course_record():
     user = users.query.filter(users.email == email).first()
 
     courses = course.query.join(user_to_course, course.id == user_to_course.course_id).\
-    filter(user_to_course.user_id == user.id).all()
+    filter(user_to_course.user_id == user.id,course.status==1).all()
 
     jitangs = jitang.query.filter().all()
     select_jitang = random.choice(jitangs)
@@ -352,7 +371,7 @@ def get_collect():
     email = session['email']
     user = users.query.filter(users.email == email).first()
 
-    courses = course.query.join(collect, course.id == collect.course_id).filter(collect.user_id == user.id).all()
+    courses = course.query.join(collect, course.id == collect.course_id).filter(collect.user_id == user.id,course.status==1).all()
 
     jitangs = jitang.query.filter().all()
     select_jitang = random.choice(jitangs)
@@ -374,3 +393,91 @@ def check_mail():
         return 'invalid'
     else:
         return 'valid'
+
+@page.route('/password/find', methods=['POST','GET'])
+def find_password():
+    if request.method == 'POST':
+        username = unquote(request.form.get('username'))
+        auth_code = request.form.get('input_auth_code')
+
+        user_confirm = users.query.filter(users.email == username).first()
+        if not user_confirm:
+            return render_template('usercontrol/find_password.html', msg=u"该邮箱未注册！") 
+        try:        
+            code = escape(session[username])
+        except:
+            code = None
+
+        logging.info('code is:%s',code)
+
+        if auth_code == code:
+            session['find_confirm'] = username
+            return redirect(url_for('usercontrol.find_password',q=username))
+        else:
+            logging.info(username)
+            return render_template('usercontrol/find_password.html', msg=u'邮箱或验证码错误！')
+
+    try:
+        req_user = unquote(request.args.get('q'))
+        confirm = session['find_confirm']
+    except Exception as e:
+        confirm = 0
+        req_user = ''
+
+    if confirm != req_user:
+        return render_template('usercontrol/find_password.html')
+    else:
+        return render_template('usercontrol/set_password.html',q=req_user)
+
+@page.route('/password/find/reset', methods=['POST'])
+def find_reset():
+
+    email = session['find_confirm']
+
+    passwd = request.form.get('passwd')
+    passwd2 = request.form.get('passwd2')
+    
+    if len(passwd) <6 or len(passwd) >24:
+        return render_template('usercontrol/set_password.html',q=email,msg=u"密码长度必须在6至24位之间")
+
+    if len(passwd) != len(passwd2):
+        return render_template('usercontrol/set_password.html',q=email,msg=u"两次输入的密码不相同！")
+
+
+    user = users.query.filter(users.email==email).first()
+    user.password = hash_string(passwd)
+    db_session.commit()
+    del session['find_confirm']
+    return redirect(url_for('usercontrol.signin',msg=u"修改密码成功,请登录"))
+
+@page.route('/password/change', methods=['POST','GET'])
+def change_password():
+
+    if request.method != 'POST':
+        return render_template('usercontrol/change_password.html')
+
+    email = escape(session['email'])
+
+    origin = request.form.get('passwd0')
+
+    passwd = request.form.get('passwd')
+    passwd2 = request.form.get('passwd2')
+
+    user = users.query.filter(users.email == email).first()
+
+    if (hash_string(origin) != user.password):
+        logging.info(hash_string(origin))
+        logging.info(user.password)
+        return render_template("usercontrol/change_password.html",msg="输入的当前密码不正确！")
+    
+    if len(passwd) <6 or len(passwd) >24:
+        return render_template('usercontrol/change_password.html',q=email,msg=u"密码长度必须在6至24位之间")
+    
+    if len(passwd) != len(passwd2):
+        return render_template('usercontrol/change_password.html',q=email,msg=u"两次输入的密码不相同！")
+
+    user.password = hash_string(passwd)
+    db_session.commit()
+    del session['username']
+    del session['email']
+    return redirect(url_for('usercontrol.signin',msg=u"修改密码成功,请登录"))

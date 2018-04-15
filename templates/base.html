@@ -28,15 +28,19 @@
             <div class="center" style="z-index: 99">
                 <div id="center_menu" >
                     <div id="logo_img">
-                            <a href="/index" target="_self">
+                            <a href="/index" target="_self" class="white">
                                 教育网站设计
                                 <!-- <img src="/static/images/logo.png" width="168" height="30" title="林于铃毕业设计" /> -->
                             </a>
                     </div>
                     <div id="entrance">
-                        <a href="/course/all" class="entrance_a">所有课程</a>
-                        <a href="/aboutthis" class="entrance_a">关于网站</a>
-                        <a href="#" class="entrance_a">还有吗</a>
+                        <div class="site_nav f_left" id="ac_btn">
+                            <a href="/course/all" class="entrance_a white">所有课程</a>
+                            <div class="ac_menu">
+                                <!-- 由js脚本去请求后台数据，动态填充-->
+                            </div>
+                        </div>
+                        <div class="site_nav f_left"><a href="/aboutthis" class="entrance_a white">关于网站</a></div>
                     </div>
 
                     <div id="menu_right">
@@ -47,18 +51,29 @@
                                     {% else %}
                                     <img src="/static/images/defaultpic.jpg" width="30px" height="30px">
                                     {% endif %}
+                                {%if session["username"] %}
+                                <div class="hide">
+                                <ul class="hide_menu">
+                                    <li><a href="/setting?id={{ session['userid']}}">设置</a></li>
+                                    {% if session["level"] == 0%}
+                                    <li><a href="/course/admin/audit">课程审核</a></li>
+                                    {% endif%}
+                                    <li><a href="/password/change">修改密码</a></li>
+                                    <li><a href="/logout">退出</a></li>
+                                </ul>
                                 </div>
-
-                        </div>
+                                {% endif %}
+                                </div>
+                            </div>
                         <div id="word_ctrl">
                             <ul>
                             {%if session["username"] %}
-                                <li><a href="/user/{{ session['userid']}}">{{ session["username"] }}</a></li>
-                                <li><a href="/course/record">我的学习</a></li>
-                                <li><a href="/course/manage">我的课程</a></li>
+                                <li><a href="/user/{{ session['userid']}}" class="white">{{ session["username"] }}</a></li>
+                                <li><a href="/course/record" class="white">我的学习</a></li>
+                                <li><a href="/course/manage" class="white">我的课程</a></li>
                             {% else %}
-                                <li><a href="/signin">登录</a>/<a href="/signup">注册</a></li>
-                                <li><a href="/signup">我的学习</a></li>
+                                <li><a href="/signin" class="white">登录</a>/<a href="/signup"  class="white">注册</a></li>
+                                <li><a href="/signup" class="white">我的学习</a></li>
                             {% endif %}
                             </ul>
                         </div>
@@ -78,25 +93,18 @@
                                 <label id="input_note" for="search_text" onfocus="transferFocus('search_text')">请输入要搜索的内容</label>
                             </div>
                             
-                            <div class="" ="search_select">
+                            <div class="search_select">
                                 <select name="search_type" class="search_select" id="search_type">
                                     <option value="course">课程名</option>
                                     <option value="provider">制作者</option>
                                 </select>
                             </div>
-
+                            <div class="search_help">
+                            </div>
                         </div>
                     </div>
                 </div>
-                {%if session["username"] %}
-                <div class="hide">
-                     <ul class="hide_menu">
 
-                         <li><a href="/setting?id={{ session['userid']}}">设置</a></li>
-                          <li><a href="/logout">退出</a></li>
-                    </ul>
-              </div>
-              {% endif %}
             </div>
         </div>
     </div>
@@ -107,5 +115,26 @@
         <div class="center" id="content_center" ><h1>主内容区域</h1></div>
     </div>
 -->
+<div class="c_footer">
+    <div class="footer_content center">
+        <div style="position:relative;overflow: hidden;height: 205px;">
+        <div class="site_desc f_left">
+            <div class="school_logo"><a href="http://www.cugb.edu.cn/index.action"><img src="/static/images/logo20141008.png"></a></div>
+            <div class="site_info">在线教育网站设计与开发。中国地质大学信息工程学院电子信息工程专业1004143101本科毕业设计。<p>特别鸣谢@指导老师 崔艳云</p></div>
+        </div>
+        <div class="site_contact_info f_right">
+            <div class="site_address">
+                <span>联系地址：北京市海淀区学院路29号</span>
+                <br>
+                <span>邮编编码：100083</span>
+                <br>
+                <span>电子邮箱：flaskadmin010@163.com</span>
+            </div>
+        </div>
+        </div>
+        <div class="copyright c_center">©Copyright 2018 中国地质大学 林于铃. <span>|</span><a href="/aboutthis">  关于我们</a></div>
+    </div>
+
+</div>
 </body>
 </html>

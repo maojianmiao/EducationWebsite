@@ -13,10 +13,10 @@ class users(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True) #用户id
     email = Column(String(120), unique=True,index=True) #用户账号，强制使用邮箱
-    passward = Column(String(40)) #密码，sha1加密
+    password = Column(String(40)) #密码，sha1加密
     new_mail = Column(String(120), unique=True)
     name = Column(String(20),index=True)  #昵称
-    level = Column(Integer) #用户权限级别
+    level = Column(Integer) #用户权限级别0:管理员，其它：暂未定义， 9：普通用户
     gender = Column(String(2)) #性别
     head_pic = Column(String(100))#用户头像
     desc = Column(String(160)) #用户描述
@@ -29,11 +29,11 @@ class users(Base):
     create_time = Column(DateTime)
     modify_time = Column(DateTime)
 
-    def __init__(self, email=None,passward=None,name=None, level=None,gender=0,head_pic=None,\
+    def __init__(self, email=None,password=None,name=None, level=9,gender=0,head_pic=None,\
         desc=None,phone_num=None,qq=None,wechat=None,is_active=None,verify_code=None,note=None,modify_time=None):
         self.name = name
         self.email = email
-        self.passward = passward
+        self.password = password
         self.level = level
         self.gender = gender
         self.head_pic =head_pic

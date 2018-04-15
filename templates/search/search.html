@@ -16,11 +16,11 @@
                         <a href="/index">首页 </a>
                         <span class="resut_notice"> > 搜索结果</span>
                     </div>
-                    <div class="serarch_result">
+                    <div class="search_result">
                         <div>共有<span>{{ course_count }}</span>门与<span>{{ text }}</span>相关的课程</div>
                         </div>
                 </div>
-                <div class="inx_course_view">
+                <div class="inx_course_view search_course_view">
                        {% for course in courses %}
                         <div class="inx_course_item" id="{{ course.id}}">
                             <a href="/course/{{ course.id }}" target="_blank">

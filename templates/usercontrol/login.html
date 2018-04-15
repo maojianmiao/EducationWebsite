@@ -5,11 +5,7 @@
     <!-- href="static/style.css" 表示网站当前域名下的文件，比如当前域名是127.0.0.1/test/login/, 网页检索静态文件是的域名将会是127.0.0.1/test/login/static/style.css。所以当要引用根目录下的静态文件时，href前的单斜杠是必须要的 -->
 {%block content%}
     <div id="allcontent">
-           <div class="logintitle">
-                <div class="center">
-                    <div class="greeting_word logintitle_sub">欢迎登陆</div>
-                </div>
-          </div>
+
         <div id="login_content">
             <div class="center">
                     <div class="shuru">
@@ -18,7 +14,7 @@
                         <div class="input_note ewidth {% if msg %} warning_note{% endif %}" id="login_input_note" >{{ msg }}</div>
                         <form method = 'post' enctype="multipart/form-data" action="/signin" onsubmit="return validate_login()">
                         <div class="ewidth input_elem div_ctrl">
-            	           <input class="ewidth input_elem" type="text" id="username" name="username" onkeydown="hideLabel('username_note',this)">
+            	           <input class="ewidth input_elem" type="text" id="username" name="username" onkeydown="hideLabel('username_note')">
                            <label id="username_note" for="username" class="label_input">邮箱地址</label>
                        </div>
                         
@@ -27,17 +23,17 @@
             	       <input class="ewidth input_elem" id="passwd" name="passwd" onkeydown="hideLabel('passwd_note')" type="password">
                        <label id="passwd_note" for="passwd" class="label_input">密码</label>
                        </div>
-                    <div class="forget_pwd f_left"><a href="#">忘记密码</a></div>
+                    <div class="forget_pwd f_left"><a href="/password/find">忘记密码</a></div>
                     <div class="ewidth input_elem div_ctrl">
                     <input class="ewidth input_elem btn_submit" type="submit" value = "登录" />
                     </div>
                     
                     </form>
-                    <div class="login_nav f_left">没有账号？<a href="signup">>立即注册</a></div>
+                    <div class="login_nav f_left">没有账号？<a href="signup">立即注册</a></div>
                 </div>
                  <br>
             </div>
-            {%endblock%}
         </div>
+  </div>
 </div>
-</div>
+{%endblock%}
