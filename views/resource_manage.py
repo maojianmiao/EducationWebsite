@@ -143,7 +143,6 @@ def upload_file():
             return ''
 
 @page.route('/course/edit',methods=['POST','GET'])
-@login_required
 def course_edit():
     if request.method == 'POST':
         course_id = request.form.get('course_id')
@@ -170,7 +169,7 @@ def course_edit():
 
     c = course.query.filter(course.id==course_id).first()
     cc_relation = category_to_course.query.filter(category_to_course.course_id == course_id).order_by(desc(category_to_course.id)).first()
-    logging.info(cc_relation.id)
+
     return render_template('manage/course_edit.html',course=c, category=cc_relation)
 
 @page.route('/course/audit',methods=['POST','GET'])
