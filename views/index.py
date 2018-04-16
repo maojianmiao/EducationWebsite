@@ -104,7 +104,7 @@ def _category(category_id):
     category_id = int(category_id)
     current = category.query.filter(category.id == category_id).first()
 
-    items = 10 #控制每页显示课程的数量
+    items = 25 #控制每页显示课程的数量
     courses = get_courses(page_id, category_id, items)
     count = get_course_count(category_id)
 
@@ -121,7 +121,7 @@ def get_all_course():
         logging.warning(e)
         page_id = 1
 
-    items = 10 #控制每页显示课程的数量
+    items = 25 #控制每页显示课程的数量
     count = get_course_count()
     logging.info(count)
     courses = get_courses(page_id,items = items)
@@ -137,8 +137,10 @@ def get_courses(page_id, category_id=None, items=30):
     else:
         courses = course.query.join(category_to_course, category_to_course.course_id == course.id)\
         .filter(category_to_course.category_id_first==category_id,course.status==1).order_by(desc(course.create_date)).slice(page_id*items - items, page_id *items).all()
-
-    logging.info(len(courses))
+        courses2 = course.query.join(category_to_course, category_to_course.course_id == course.id)\
+        .filter(category_to_course.category_id_second==category_id,course.status==1).order_by(desc(course.create_date)).slice(page_id*items - items, page_id *items).all()
+        
+        courses += courses2
     return courses
 
 def get_course_count(category_id=None):
@@ -147,7 +149,9 @@ def get_course_count(category_id=None):
     else:
         count = db_session.query(func.count(course.id)).join(category_to_course, category_to_course.category_id_first == course.id)\
         .filter(category_to_course.category_id_first==category_id,course.status==1).first()[0]
-
+        count2 = db_session.query(func.count(course.id)).join(category_to_course, category_to_course.category_id_first == course.id)\
+        .filter(category_to_course.category_id_second==category_id,course.status==1).first()[0]
+        count += count2
     logging.info('category id: %s course count: %s', category_id, count)
     return count
 

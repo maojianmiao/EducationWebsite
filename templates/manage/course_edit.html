@@ -24,10 +24,13 @@
                                     </select>
                                     <script type="text/javascript">
                                         //加载的时候读取默认二级分类
-                                        category_id = $('.course_category').attr("for-data");
+                                        category_id  = $('.course_category').attr("for-data");
+                                        category_id = category_id || 1
                                         $.get('/subselect/' + category_id,function(data,status){
                                             $('.sub_category').html(data);
-                                            $(".course_category").val($(".course_category").attr("for-data"));
+                                            level1 = $(".course_category").attr("for-data");
+                                            level1 = level1 || 1;
+                                            $(".course_category").val(level1);
                                             var d = $(".sub_category").attr("for-data");
                                             $(".sub_category").val(d);
                                         });

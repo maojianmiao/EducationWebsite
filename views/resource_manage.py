@@ -89,7 +89,21 @@ def video_manage(courseid):
     for l in lessons:
         l.str_create_date = l.create_date.strftime('%Y-%m-%d %H:%M:%S')
     c_course = course.query.filter(course.id == courseid).first()
-    return render_template('manage/lesson_manage.html',course=c_course,lessons=lessons,user=user)
+
+    index = category_to_course.query.filter(category_to_course.course_id == courseid).order_by(desc(category_to_course.id)).first()
+    if not index:
+        level1 = u'未定义'
+        level2 = ''
+
+    if index:
+        level1 = category.query.filter(category.id == index.category_id_first).first().category_name
+        if index.category_id_second:
+            level2 = '/' + category.query.filter(category.id == index.category_id_second).first().category_name
+        else:
+            level2 = ''
+    else:
+        level2 = ''
+    return render_template('manage/lesson_manage.html',course=c_course,lessons=lessons,user=user,level1=level1,level2=level2)
 
 @page.route('/subselect/<int:pre_id>')
 def sub_select(pre_id):
@@ -221,7 +235,7 @@ def lesson_new():
     current_course.status = 3 #课程的任何信息有改动都把课程状态设置为3：已修改，防止未审核的内容发布给用户
 
     try:
-        c_order = int(session['order_{}'.format(user.id)]) + 1
+        c_order = int(session['order_{}'.format(course_id)]) + 1
     except:
         c_order = 1
 
@@ -230,7 +244,7 @@ def lesson_new():
     else:
         order = c_order
     new_video = video(title=video_title,video_url=video_url,description=v_desc,course_id=course_id,duration=duration,order=order)
-    session['order_{}'.format(user.id)] = order
+    session['order_{}'.format(course_id)] = order
     db_session.add(new_video)
     db_session.commit()
     return 'success'
@@ -340,7 +354,21 @@ def lesson_audit(courseid):
         l.str_create_date = l.create_date.strftime('%Y-%m-%d %H:%M:%S')
     c_course = course.query.filter(course.id == courseid).first()
     
-    return render_template('manage/lesson_audit.html',course=c_course,lessons=lessons,user=user)
+    index = category_to_course.query.filter(category_to_course.course_id == courseid).order_by(desc(category_to_course.id)).first()
+    if not index:
+        level1 = u'未定义'
+        level2 = ''
+
+    if index:
+        level1 = category.query.filter(category.id == index.category_id_first).first().category_name
+        if index.category_id_second:
+            level2 = '/' + category.query.filter(category.id == index.category_id_second).first().category_name
+        else:
+            level2 = ''
+    else:
+        level2 = ''
+
+    return render_template('manage/lesson_audit.html',course=c_course,lessons=lessons,user=user, level1=level1, level2=level2)
 
 @page.route('/course/admin/refuse',methods=['POST'])
 @admin_required

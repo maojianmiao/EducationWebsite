@@ -140,12 +140,13 @@ html{
     display: inline;
     line-height: 60px;
 }
+#entrance a{display: block;}
 #ac_btn:hover div{
     display: block;
 }
 .ac_menu{background-color: #d2f0ee;color: white;position: absolute;display: none;}
 .ac_menu ul{margin: 0;list-style-type: none;padding: 0;width: 100px;}
-.ac_menu a{color: gray;}
+.ac_menu a{color: gray;display: block;}
 .p_li:hover ul{display: block;}
 .subul {position:absolute;background-color: #d2f0ee;padding: 0;left:100px; top:0px; display: none;}
 .subul li:hover{color: white;background-color:#00806E; }

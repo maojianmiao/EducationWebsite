@@ -17,7 +17,10 @@
                     <div class="ii_image f_left"><img src="{{ course.item_image}}"></div>
                     <div style="overflow: hidden;line-height: 30px;">
                         <div class="lesson_info_title f_left" id={{ course.id}}>课程名：{{course.title}}</div>
-                        <div class="course_status f_right">状态：{{ course.get_status_text() }}</div>
+                        <div class="course_status f_right">
+                            <div class="f_right" style="margin-left: 10px;">状态：{{ course.get_status_text() }}</div>
+                            <div class="f_right" >分类：{{level1}}{{level2}}</div>
+                        </div>
                     </div>
                     <div style="line-height: 14px;"><span style="color:red;font-size: 12px;"> 注意：请勿上传黄色、暴力、反党、反人类、盗版、非教育类等违法乱纪内容</span></div>
                     <hr>
