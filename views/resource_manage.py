@@ -175,10 +175,6 @@ def course_edit():
 
     c = course.query.filter(course.id==course_id).first()
     cc_relation = category_to_course.query.filter(category_to_course.course_id == course_id).order_by(desc(category_to_course.id)).first()
-<<<<<<< HEAD
-=======
-
->>>>>>> 0cfb814b7cb58841989c0b165c57d6c917d987f6
     return render_template('manage/course_edit.html',course=c, category=cc_relation)
 
 @page.route('/course/audit',methods=['POST','GET'])

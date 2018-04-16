@@ -137,10 +137,9 @@ def get_courses(page_id, category_id=None, items=30):
     else:
         courses = course.query.join(category_to_course, category_to_course.course_id == course.id)\
         .filter(category_to_course.category_id_first==category_id,course.status==1).order_by(desc(course.create_date)).slice(page_id*items - items, page_id *items).all()
-        courses2 = course.query.join(category_to_course, category_to_course.course_id == course.id)\
-        .filter(category_to_course.category_id_second==category_id,course.status==1).order_by(desc(course.create_date)).slice(page_id*items - items, page_id *items).all()
 
-    return courses + courses2
+    logging.info(len(courses))
+    return courses
 
 def get_course_count(category_id=None):
     if not category_id:
