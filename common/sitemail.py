@@ -30,7 +30,7 @@ class sitemail(object):
             return False
 
     def send(self,msg_to,title,content):
-        msg = MIMEText(content)
+        msg = MIMEText(content,_charset='utf-8')
         msg['Subject'] = title
         msg['From'] = self.msg_from
         msg['To'] = msg_to
@@ -50,5 +50,5 @@ class sitemail(object):
 if __name__ == "__main__":
     m = sitemail()
     m.mail_server()
-    m.send('396679681@qq.com','test','你好')
+    m.send('185817674@qq.com',u'test',u'你为什么不说话')
     m.quit
