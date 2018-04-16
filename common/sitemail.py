@@ -35,7 +35,6 @@ class sitemail(object):
         msg['From'] = self.msg_from
         msg['To'] = msg_to
 
-        print msg.as_string()
         try:
             self.s.sendmail(self.msg_from,msg_to,msg.as_string())
             logging.info(u"发送成功")
