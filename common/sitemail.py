@@ -30,11 +30,12 @@ class sitemail(object):
             return False
 
     def send(self,msg_to,title,content):
-        msg = MIMEText(content)
+        msg = MIMEText(content,_charset='utf-8')
         msg['Subject'] = title
         msg['From'] = self.msg_from
         msg['To'] = msg_to
 
+        print msg.as_string()
         try:
             self.s.sendmail(self.msg_from,msg_to,msg.as_string())
             logging.info(u"发送成功")
@@ -50,5 +51,5 @@ class sitemail(object):
 if __name__ == "__main__":
     m = sitemail()
     m.mail_server()
-    m.send('396679681@qq.com','test','你好')
+    m.send(u'gdmaojm@163.com',u'网易邮箱',u'你好')
     m.quit
