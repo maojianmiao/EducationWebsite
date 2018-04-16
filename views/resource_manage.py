@@ -143,7 +143,6 @@ def upload_file():
             return ''
 
 @page.route('/course/edit',methods=['POST','GET'])
-@login_required
 def course_edit():
     if request.method == 'POST':
         course_id = request.form.get('course_id')
@@ -158,11 +157,17 @@ def course_edit():
         c.description = request.form.get('desc')
         c.status = 3 ###课程状态0: 未审核；1：已审核；2：审核中 3：已修改
         relation = category_to_course.query.filter(category_to_course.course_id==course_id).order_by(desc(category_to_course.id)).first()
-        logging.info(relation.id)
-        relation.category_id_first = int(request.form.get('category_id'))
-        relation.category_id_second = sub_id
+        
+        if not relation:
+            relation = category_to_course(course_id,int(request.form.get('category_id')),sub_id)
+            db_session.add(relation)
+        else:
+            relation.category_id_first = int(request.form.get('category_id'))
+            relation.category_id_second = sub_id
+        
         db_session.commit()
         return 'success'
+    
     try:
         course_id = int(request.args.get('course_id'))
     except Exception,e:
@@ -170,7 +175,6 @@ def course_edit():
 
     c = course.query.filter(course.id==course_id).first()
     cc_relation = category_to_course.query.filter(category_to_course.course_id == course_id).order_by(desc(category_to_course.id)).first()
-    logging.info(cc_relation.id)
     return render_template('manage/course_edit.html',course=c, category=cc_relation)
 
 @page.route('/course/audit',methods=['POST','GET'])
