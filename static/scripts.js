@@ -1001,7 +1001,7 @@ function deleteItems(url){
 function deleteLesson(url){
   var elems = $('.single_check:checked');
   var items = '';
-  cid = $('.manage_info_title').attr('id');
+  cid = $('.course_manage').attr('id');
   if (elems.length == 0){
     alert("请至少选择一个要删除的项目！");
     return false;

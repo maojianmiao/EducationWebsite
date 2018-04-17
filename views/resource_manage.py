@@ -311,6 +311,7 @@ def audit_course():
         except Exception,e:
             logging.info(e)
             return 'fail'
+
         for cid in items:
             if not cid:
                 continue
@@ -319,6 +320,11 @@ def audit_course():
 
             videos = video.query.filter(video.course_id == int(cid)).all()
             for v in videos:
+                print v.status
+                if v.status == 5:
+                    print 'delete %s' % v.id
+                    db_session.delete(v)
+                    continue
                 v.status = 1 #审核通过，把视频状态都改一下
 
         db_session.commit()
