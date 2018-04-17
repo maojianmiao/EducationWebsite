@@ -234,15 +234,11 @@ def lesson_new():
     current_course = course.query.filter(course.id == course_id).first()
     current_course.status = 3 #课程的任何信息有改动都把课程状态设置为3：已修改，防止未审核的内容发布给用户
 
-    try:
-        c_order = int(session['order_{}'.format(course_id)]) + 1
-    except:
-        c_order = 1
 
     if sql_order:
         order = sql_order.order + 1
     else:
-        order = c_order
+        order = 1
     new_video = video(title=video_title,video_url=video_url,description=v_desc,course_id=course_id,duration=duration,order=order)
     session['order_{}'.format(course_id)] = order
     db_session.add(new_video)
@@ -320,32 +316,33 @@ def audit_course():
 
             videos = video.query.filter(video.course_id == int(cid)).all()
             for v in videos:
-                print v.status
-                if v.status == 5:
+                print v.status, type(v.status),v.id
+                if int(v.status) == 5:
                     print 'delete %s' % v.id
                     db_session.delete(v)
                     continue
                 v.status = 1 #审核通过，把视频状态都改一下
 
         db_session.commit()
+        
         return 'success'
 
     try:
         page_id = int(request.args.get('pid'))
     except Exception,e:
-        logging.warning(e)
+        logging.warning('no item: %s',e)
         page_id = 1
 
     items = 22 #控制每页显示课程的数量
     count = db_session.query(func.count(course.id)).filter(course.status == 2).first()[0]
-    logging.info(count)
+    logging.info('count: %s',count)
     courses = course.query.filter(course.status == 2).slice(page_id*items - items, page_id *items).all()
     if courses:
         for c in courses:
             c.str_create_date = c.create_date.strftime('%Y-%m-%d %H:%M:%S')
 
     pageseq = get_page_seq(count, items)
-    logging.info(pageseq)
+    logging.info('pageseq: %s' ,pageseq)
 
     return render_template('manage/course_audit.html', courses = courses, pageseq = pageseq)
 

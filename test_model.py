@@ -203,13 +203,8 @@ if __name__ == "__main__":
         c = course(u'测试课程'+str(i),item_image=url,description='ceshi')
         db_session.add(c)
 
-
-    pre_id = 1
-    names =[u'地理',u'历史']
-    for name in names:
-        current = category(name,level=2,pre_category_id=pre_id)
-        db_session.add(current)
-    
+    v = video.query.filter(video.id == 106).first()
+    db_session.delete(v)
     db_session.commit()
     #print count
 

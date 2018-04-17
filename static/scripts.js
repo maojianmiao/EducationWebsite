@@ -1181,7 +1181,12 @@ function audit(url){
 function f_audit(url){
         var elems = $('.single_check:checked');
         var items = '';
-        if (elems.length == 0){
+        var single = $('.course_manage').attr('id');
+        if (single){
+          items += single;
+        }
+
+        if (elems.length == 0 && !single){
               alert("请至少选择一个审核的项目！");
               return false;
         }

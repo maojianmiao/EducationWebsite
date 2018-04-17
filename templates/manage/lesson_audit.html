@@ -9,7 +9,7 @@
 {%endblock%}
 {%block content%}
     <div id="allcontent">
-        <div class="course_manage">
+        <div class="course_manage" id="{{ course.id }}">
             <div class="manage_info center">
                 <div class="mi_nav"><a href="/course/admin/audit">课程列表</a> > 课时管理</div>
                 <div class="item_image f_left">
@@ -30,8 +30,8 @@
                     <div class="manage_nav">
                         <div class="manage_menu">
                              <ul>
-                                <li class="audit_pass">审核通过</a></li>
-                                <li class="audit_refuse">审核驳回</li>
+                                <li class="audit_pass" onclick="f_audit('/course/admin/audit')">审核通过</a></li>
+                                <li class="audit_refuse" onclick="f_audit('/course/admin/refuse')">审核驳回</li>
                             </ul>
                             </div>
                 </div>
