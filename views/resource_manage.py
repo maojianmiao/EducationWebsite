@@ -337,7 +337,7 @@ def audit_course():
         page_id = 1
 
     items = 22 #控制每页显示课程的数量
-    count = db_session.query(func.count(course.id)).filter().first()[0]
+    count = db_session.query(func.count(course.id)).filter(course.status == 2).first()[0]
     logging.info(count)
     courses = course.query.filter(course.status == 2).slice(page_id*items - items, page_id *items).all()
     if courses:
