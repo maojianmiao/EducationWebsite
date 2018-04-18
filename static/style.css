@@ -992,3 +992,5 @@ td{vertical-align: top;}
 .c_desc{line-height: 16px;overflow: hidden;width: 860px;}
 .lesson_info_title{font-size: 20px;}
 .lesson_info_desc{width:860px;line-height: 23px; margin-top: 5px;overflow: auto}
+.l_desc{max-width:350px;min-height:15px;max-height:45px;overflow: auto;line-height: 15px;}
+.l_url{max-width: 150px;height: 40px;line-height: 15px;}

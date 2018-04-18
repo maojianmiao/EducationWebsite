@@ -57,8 +57,8 @@
                                 <td><input type="checkbox" name="item_{{ lesson.id }}" value="{{ lesson.id}}" class="single_check" value="{{ lesson.id}}"></td>
                                 <td>{{ lesson.order }}</td>
                                 <td>{{ lesson.title }}</td>
-                                <td><div class="desc">{{ lesson.description }}</div></td>
-                                <td>{{ lesson.video_url }}</td>
+                                <td><div class="l_desc">{{ lesson.description }}</div></td>
+                                <td><a href="{{ lesson.video_url }}">点击播放</a></td>
                                 <td>{{ lesson.duration }}</td>
                                 <td>{{ user.name }}</td>
                                 <td>{{ lesson.get_status_text() }}</td>
