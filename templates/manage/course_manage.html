@@ -40,7 +40,7 @@
                             <tr>
                                 <td><input type="checkbox" name="item_{{ course.id }}" class="single_check" value="{{ course.id }}"></td>
                                 <td><a href="/course/manage/{{ course.id }}"> {{course.title}} </a></td>
-                                <td class="cm_course_url"><span class="pic_url">{{ course.item_image }}</span></td>
+                                <td class="cm_course_url"><a href="{{ course.item_image }}" target="_blank">点击查看图片</a></td>
                                 <td class="create_date">{{ course.str_create_date }}</td>
                                 <td id="status_{{course.id}}" value="{{course.status}}"> {{course.get_status_text() }} </td>
                                 <td class="cm_username"> {{course.users.name}} </td>
