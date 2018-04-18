@@ -989,6 +989,6 @@ td{vertical-align: top;}
 .item_image img{width: 320px;height: 180px;}
 .ii_image{width: 340px;}
 .course_status{color: #00806E;line-height: 30px;}
-.c_desc{line-height: 20px;overflow: hidden;}
+.c_desc{line-height: 16px;overflow: hidden;width: 860px;}
 .lesson_info_title{font-size: 20px;}
 .lesson_info_desc{width:860px;line-height: 23px; margin-top: 5px;overflow: auto}
