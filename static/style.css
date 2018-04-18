@@ -428,12 +428,12 @@ a.added {
 }
 .course_detail{
     position: relative;
-    height:500px;
 }
 .course_content_left{
     position: relative;
     width: 880px;
     float: left;
+    min-height: 300px;
 }
 
 .course_content_right{
