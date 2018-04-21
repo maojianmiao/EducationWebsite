@@ -1001,3 +1001,4 @@ td{vertical-align: top;}
 .r_desc{line-height: 40px;color: black;}
 .r_item_title{color: #0a0b0b;margin-bottom:6px;font-size: 20px;}
 .c_recommend{margin-top: 20px;}
+.r_item:hover div {color: #00806E}
