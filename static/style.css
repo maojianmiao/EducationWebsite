@@ -766,7 +766,7 @@ div.inx_course_pic:hover{
 }
 
 #login_content{
-    min-height: 500px;
+    min-height: 600px;
     width: 100%;
     background-color: rgba(0,128,110,0.2);
     background: url(/static/images/yishujia.png);
