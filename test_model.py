@@ -198,13 +198,6 @@ if __name__ == "__main__":
     #.order_by(desc(course_rate.create_date)).slice(0, 5).all()
     #print rates
     #count = db_session.query(func.count(course.id)).first()[0]
-    url = '/uploads/images/433bbde4a2981393faf3aae35329bd02c791a241.png'
-    for i in range(30):
-        c = course(u'测试课程'+str(i),item_image=url,description='ceshi')
-        db_session.add(c)
-
-    v = video.query.filter(video.id == 106).first()
-    db_session.delete(v)
     db_session.commit()
     #print count
 

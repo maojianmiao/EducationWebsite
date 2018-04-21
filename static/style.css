@@ -151,7 +151,7 @@ html{
 .subul {position:absolute;background-color: #d2f0ee;padding: 0;left:100px; top:0px; display: none;}
 .subul li:hover{color: white;background-color:#00806E; }
 .subul li:hover a{color: white;background-color:#00806E; }
-.site_nav{height: 60px;width: 100px;margin-left: 10px;}
+.site_nav{height: 60px;width: 100px;}
 .p_li{position: relative;height: 30px;line-height: 30px;}
 .p_li:hover{background-color: rgba(32,178,170,0.2);}
 .site_nav:hover{background-color: lightseagreen;cursor: pointer;}
@@ -173,7 +173,7 @@ html{
 }
 
 #word_ctrl{
-    width: 350px;
+    width: 320px;
     height: 30px;
     line-height: 30px;
     float: right;
@@ -994,3 +994,10 @@ td{vertical-align: top;}
 .lesson_info_desc{width:860px;line-height: 23px; margin-top: 5px;overflow: auto}
 .l_desc{max-width:350px;min-height:15px;max-height:45px;overflow: auto;line-height: 15px;}
 .l_url{max-width: 150px;height: 40px;line-height: 15px;}
+
+/* style of recommend page*/
+.r_item_image img{width: 1200px;height:360px;}
+.r_item{position:relative;padding-bottom: 25px;}
+.r_desc{line-height: 40px;color: black;}
+.r_item_title{color: #0a0b0b;margin-bottom:6px;font-size: 20px;}
+.c_recommend{margin-top: 20px;}

@@ -14,6 +14,7 @@ from models.course import course
 from models.users import users
 from models.jitang import jitang
 from models.category import category, category_to_course
+from models.recommend import recommend
 import os
 import logging
 page = Blueprint('index',__name__)
@@ -163,3 +164,7 @@ def ul_menu():
 
     return render_template('index/ul_menu.html',categorys=categorys)
 
+@page.route('/recommend')
+def friend_recommend():
+    recommends = recommend.query.filter().all()
+    return render_template('index/recommend.html',recommends=recommends)

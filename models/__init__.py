@@ -22,4 +22,5 @@ def init_db():
     # 在这里导入所有的可能与定义模型有关的模块，这样他们才会合适地
     # 在 metadata 中注册。否则，您将不得不在第一次执行 init_db() 时
     # 先导入他们。
+    import recommend
     Base.metadata.create_all(bind=engine)
