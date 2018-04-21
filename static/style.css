@@ -156,6 +156,14 @@ html{
 .p_li:hover{background-color: rgba(32,178,170,0.2);}
 .site_nav:hover{background-color: lightseagreen;cursor: pointer;}
 
+.recommend:hover div{
+    display: block;
+}
+.nav_menu{background-color: #d2f0ee;color: white;position: absolute;display: none;}
+.nav_menu ul{margin: 0;list-style-type: none;padding: 0;width: 100px;}
+.nav_menu a{color: gray;display: block;}
+.nav_p_li{position: relative;height: 30px;line-height: 30px;}
+.nav_p_li:hover{background-color: rgba(32,178,170,0.2);}
 #menu_right{
     position: relative;
     float: right;

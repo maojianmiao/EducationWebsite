@@ -36,11 +36,25 @@
                     <div id="entrance">
                         <div class="site_nav f_left" id="ac_btn">
                             <a href="/course/all" class="entrance_a white">所有课程</a>
-                            <div class="ac_menu">
+                            <div class="ac_menu nav_menu">
                                 <!-- 由js脚本去请求后台数据，动态填充-->
                             </div>
                         </div>
-                        <div class="site_nav f_left"><a href="/recommend" class="entrance_a white">精品推荐</a></div>
+                        <div class="site_nav f_left recommend">
+                            <a href="/recommend" class="entrance_a white">精品推荐</a>
+                            <div class="nav_menu">
+                                <ul class="nav_menu_ul">
+                                    <li class="nav_p_li">
+                                    <a href="https://www.guokr.com/" target="_blank">果壳网</a></li >
+                                    <li class="nav_p_li">
+                                    <a href="https://www.csdn.net/" target="_blank">CSDN</a></li >
+                                    <li class="nav_p_li">
+                                    <a href="https://www.imooc.com/" target="_blank">慕课网</a></li>
+                                    <li class="nav_p_li">
+                                    <a href="https://open.163.com/" target="_blank">公开课</a></li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="site_nav f_left"><a href="/aboutthis" class="entrance_a white">关于网站</a></div>
                     </div>
 
@@ -75,6 +89,7 @@
                             {% else %}
                                 <li><a href="/signin" class="white">登录</a>/<a href="/signup"  class="white">注册</a></li>
                                 <li><a href="/signup" class="white">我的学习</a></li>
+
                             {% endif %}
                             </ul>
                         </div>
