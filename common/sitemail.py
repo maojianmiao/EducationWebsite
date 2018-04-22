@@ -17,7 +17,7 @@ class sitemail(object):
         self.passwd = 'flaskadmin010'   #授权码
         #授权码和密码不是一个。密码：010010
         self.smtpserver = "smtp.163.com"
-        self.timeout = 20       #登录超时时间
+        self.timeout = 8       #登录超时时间
 
     def mail_server(self):
         try:

@@ -34,6 +34,31 @@ host配置：
     2、users.py
         用户信息表模型
 
+    查询示例（以course表为准）
+        首先得导入course模型
+            from models.course import course
+        查询user_id为1的用户上传的一个课程
+            c = course.query.filter(course.user_id == 1).first()
+        查询user_id为1的用户上传的所有课程
+            courses = course.query.filter(course.user_id==1,course.title.like('%aaa%')).all()
+
+        修改内容，比如修改课程的名字
+            先查询要修改的那个课程, 然后修改字段, 再提交
+                c = course.query.filter(course.id == 1).first()
+                c.title = 'modify title'
+                db_session.commit()
+        新增内容, 填写必要项
+            c = course(title=u'新增课程',user_id=1,item_image='/static/xx.png')
+            db_session.add(c)
+            db_session.commit()
+        删除内容，首先查出要删除的记录，然后删除提交
+            c = course.query.filter(course.id == 1).first()
+            db_session.delete(c)
+            db_session.commit()
+
+        
+
+
 三、static——静态文件存放文件夹
 
     1、css

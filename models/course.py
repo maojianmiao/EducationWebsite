@@ -49,6 +49,7 @@ class course(Base):
             self.user_id = user_id
         else:
             self.users = users
+            
         self.status = status
         self.audit_by = audit_by
         self.audit_note = audit_note

@@ -33,7 +33,7 @@ def index():
     for item in categorys:
         
         item.courses = course.query.join(category_to_course, category_to_course.course_id == course.id).\
-        filter(category_to_course.category_id_first == item.id,course.status==1).slice(0,8).all()
+        filter(category_to_course.category_id_first == item.id,course.status==1).slice(0,10).all()
         #logging.info(item.courses)
         for c in item.courses:
             c.user = users.query.filter(users.id == c.user_id).first()
@@ -83,7 +83,7 @@ def about():
     except:
         username = None
 
-    with open('README.md','rb') as f:
+    with open('about.txt','rb') as f:
         content = f.read()
         logging.info(content)
         return render_template('about.html',readme=content,username=username)

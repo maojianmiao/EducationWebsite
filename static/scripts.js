@@ -19,7 +19,6 @@ $(document).ready(function(){
       toPage = current - 1;
       url = root_url + '?pid=' + toPage;
       window.location = url;
-      
     });
 
   $("#pageNext").on("click", function(){
@@ -151,7 +150,7 @@ $(document).ready(function(){
 
       $.get('/input/refer?text=' + text,function(data,status){
         if (status=='success' && data){
-          $('.search_help').html(data);
+          $('.search_help').html(data);//找到class为search_help的元素，把data填充到此元素下
         }
         else{
           $('.search_help').html('');

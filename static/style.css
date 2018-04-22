@@ -149,16 +149,13 @@ html{
 .ac_menu a{color: gray;display: block;}
 .p_li:hover ul{display: block;}
 .subul {position:absolute;background-color: #d2f0ee;padding: 0;left:100px; top:0px; display: none;}
-.subul li:hover{color: white;background-color:#00806E; }
 .subul li:hover a{color: white;background-color:#00806E; }
 .site_nav{height: 60px;width: 100px;}
 .p_li{position: relative;height: 30px;line-height: 30px;}
 .p_li:hover{background-color: rgba(32,178,170,0.2);}
 .site_nav:hover{background-color: lightseagreen;cursor: pointer;}
 
-.recommend:hover div{
-    display: block;
-}
+.recommend:hover .nav_menu{display: block;}
 .nav_menu{background-color: #d2f0ee;color: white;position: absolute;display: none;}
 .nav_menu ul{margin: 0;list-style-type: none;padding: 0;width: 100px;}
 .nav_menu a{color: gray;display: block;}
@@ -261,16 +258,17 @@ option:hover{color: lightseagreen;}
     font-size: 13px;
 }
 
- #about_center{
+#about_center{
     width: 1200px;
     margin:0px auto 0px auto;
     background-color: white;
     position: relative;
-    top:60px;
     white-space: pre-wrap;
-
+    min-height: 600px;
+    top: 20px;
+    font-size: 20px;
  }
-
+ 
 /* style of footer */
 .c_footer{color:black;position:relative;margin-top: 60px;width:100%;background-color: #00806E;overflow: hidden;}
 .site_desc{margin-top:20px;overflow: hidden;}
@@ -612,6 +610,7 @@ div.inx_course_title:hover{
 .inx_course_pic{
     transition:width 1s, height 1s,transform 1s;
 }
+/* 覆盖的时候宽高放大1.3倍*/
 div.inx_course_pic:hover{
     transform:scale(1.3,1.3);
 }
