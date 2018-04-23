@@ -7,7 +7,7 @@ nginx
 
 host配置：
     127.0.0.1   video.lyl.com
-
+    127.0.0.1   design.lyl.edu.cn
 页面设计：
     主色调：#00806E
     副色调：lightseagreen
