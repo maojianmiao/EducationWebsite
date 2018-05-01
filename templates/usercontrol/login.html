@@ -10,28 +10,55 @@
             <div class="center">
                     <div class="shuru">
                         <div class="shuru_title">账号登录</div>
-                        <div class="login_form">
+                        <div class="login_form" style="padding-left: 10px;">
+                          <table>
+                            <tr>
+                            <td></td>
+                            <td>
                         <div class="input_note ewidth {% if msg %} warning_note{% endif %}" id="login_input_note" >{{ msg }}</div>
-                        <form method = 'post' enctype="multipart/form-data" action="/signin" onsubmit="return validate_login()">
+                        </td>
+                        </tr>
+                        <form method='post' enctype="multipart/form-data" action="/signin" onsubmit="return validate_login()">
+                          <tr class="tr_input">
+                            <td class="t_title"><div class="tt">邮箱: </div></td>
+                            <td>
                         <div class="ewidth input_elem div_ctrl">
-            	           <input class="ewidth input_elem" type="text" id="username" name="username" onkeydown="hideLabel('username_note')">
-                           <label id="username_note" for="username" class="label_input">邮箱地址</label>
+            	           <input class="ewidth input_elem" type="text" id="username" name="username">
                        </div>
-                        
-            	       <br>
-                       <div class="ewidth below_input input_elem div_ctrl">
-            	       <input class="ewidth input_elem" id="passwd" name="passwd" onkeydown="hideLabel('passwd_note')" type="password">
-                       <label id="passwd_note" for="passwd" class="label_input">密码</label>
+                       </td>
+                        </tr>
+            	 
+                     <tr class="tr_input">
+                      <td class="t_title pwd "><div class="below_input tt">密码: </div></td>
+                      <td>
+                       <div class="ewidth input_elem div_ctrl below_input">
+            	       <input class="ewidth input_elem" id="passwd" name="passwd" type="password">
                        </div>
+                       </td>
+                       </tr>
+                       <tr>
+                        <td></td>
+                        <td>
                     <div class="forget_pwd f_left"><a href="/password/find">忘记密码</a></div>
+                    </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>
                     <div class="ewidth input_elem div_ctrl">
                     <input class="ewidth input_elem btn_submit" type="submit" value = "登录" />
                     </div>
-                    
+                    </td>
+                    </tr>
                     </form>
+                    <tr>
+                      <td></td>
+                      <td>
                     <div class="login_nav f_left">没有账号？<a href="signup">立即注册</a></div>
+                    </td>
+                    </tr>
+                    </table>
                 </div>
-                 <br>
             </div>
         </div>
   </div>

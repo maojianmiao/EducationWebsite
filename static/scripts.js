@@ -158,7 +158,9 @@ $(document).ready(function(){
       });
     });
 
-    clearLabel();
+    //document.getElementById("username").click();
+    //console.log("username");
+    //clearLabel(0);
 }); // end of document
 
 
@@ -1213,10 +1215,15 @@ function f_audit(url){
             return false;
 }}
 
-function clearLabel(){
-    var username = $('#username').val();
-    var passwd = $('#passwd').val();
+function clearLabel(time){
+    username = document.getElementById("username").value;
+    passwd = document.getElementById("passwd").value;
+    document.getElementById("username").click();
+    if (time>5){
+      return true
+    }
 
+    time += 0.2;
     console.log('username:' + username);
     console.log('passwd: ' + passwd);
     if (username){
@@ -1225,4 +1232,6 @@ function clearLabel(){
     if (passwd){
       $('#passwd_note').css('display','none');
     }
+    console.log("time: " + time);
+    setTimeout("clearLabel(" + time + ")",200);
 }

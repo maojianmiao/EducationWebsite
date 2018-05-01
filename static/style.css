@@ -123,13 +123,25 @@ html{
 #logo_img{
     /*height: 30px;
     margin-top:15px;*/
-    height: 60px;
-    line-height: 60px;
+    position: relative;
+    overflow: hidden;
     text-align: left;
-    font-size: 25px;
-    width:168px;
+    font-size: 23px;
+    min-width:200px;
     float: left;
     margin-right: 10px;
+}
+#logo_img img{
+    height: 30px;
+    width: 30px;
+}
+#logo_img a{
+    display: block;
+    line-height: 30px;
+}
+.logo_mar{
+    position: relative;
+    margin-top: 15px;
 }
 #entrance{
     float: left;
@@ -178,7 +190,7 @@ html{
 }
 
 #word_ctrl{
-    width: 320px;
+    min-width: 280px;
     height: 30px;
     line-height: 30px;
     float: right;
@@ -787,10 +799,21 @@ div.shuru
     float: right;
     border-color:gray;
     background-color: white;
-    width:400px;
+    min-width:430px;
     height:400px;
     border: 1px solid lightgray;
 }
+.shuru table{
+    border-collapse:separate;
+ }
+td.t_title{
+    text-align: right;
+    color: #00806E;
+ }
+tr.tr_input{
+    border-spacing: 15px;
+    line-height: 44px;
+ }
 .shuru_title{
     text-align: center;
     height: 60px;
@@ -804,7 +827,10 @@ div.shuru
 .login_form{
     padding-left: 30px;
 }
-
+div.tt{
+    margin-right: 5px;
+    font-size: 18px;
+}
 .input_note{;
     font-size: 12px;
     height: 23px;
