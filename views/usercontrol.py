@@ -94,6 +94,7 @@ def signup():
         session['email'] = username
         session['userid'] = new.id
         session['level'] = 9
+        session['head_pic'] = default_pic
         logging.info(new.id)
         try:
             #删除写入session的注册验证码
@@ -111,6 +112,7 @@ def logout():
         session.pop('username', None)
         session.pop('head_pic', None)
         session.pop('email', None)
+        session.pop('userid', None)
         session.pop('level',None)
         return redirect(url_for("usercontrol.signin"))
     except Exception,e:
@@ -288,8 +290,8 @@ def activate():
         return render_template('usercontrol/notice.html',msg=u'邮箱已激活！')
     
     try:
-        s = session['email']
-        session['email'] = d['email']
+        if escape(session['email'])==user.email:
+            session['email'] = d['email']
     except:
         pass
     #修改用户主表的登录邮箱账号

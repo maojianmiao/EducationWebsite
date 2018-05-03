@@ -24,7 +24,7 @@ page = Blueprint('index',__name__)
 @page.route('/index')
 def index():
     try:
-        username = escape(session['username'])
+        username = escape(session['email'])
     except:
         username = None
 
