@@ -55,6 +55,9 @@ $(document).ready(function(){
         toPage = Number(getParamValue('pid'));
     
     }
+    else{
+      toPage = 1;
+    }
     pageingRender(toPage, maxPage);
 
     //渲染用户查看课程记录页面
