@@ -19,6 +19,7 @@ import hashlib
 from sqlalchemy import desc,asc,func
 from models.user_to_course import user_to_course, collect
 from models.course_rate import course_rate
+from models.change_email import change_email
 from common.api import to_mp4
 from models.jitang import jitang
 #import imageio

@@ -227,7 +227,7 @@ def get_record():
             return '0'
 
 @page.route('/course/<int:courseid>')
-@login_required
+#@login_required
 def get_course(courseid):
     user = users.query.filter(users.email == session['email']).first() 
     
@@ -256,7 +256,7 @@ def get_course(courseid):
     if rate_count[0] > 0:
         current_course.score_count = rate_count[0]
     if rate_count[1]:
-        current_course.score = rate_count[1] / float(rate_count[0])
+        current_course.score = float(rate_count[1]) / float(rate_count[0])
 
     for v in lessons:
         v.format_duration = '%02d:%02d' % (int(v.duration /60), int(v.duration % 60))

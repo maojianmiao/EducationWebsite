@@ -25,11 +25,11 @@ class course(Base):
     score_count = Column(Integer) #评分人数
     description = Column(Text) #描述
     cost = Column(Float) #学习课程费用，0表示免费
-    item_image = Column(String(50))#小缩略图
-
+    item_image = Column(String(100))#小缩略图
+    status = Column(Integer)##课程状态0: 未审核；1：已审核；2：审核中 3：已修改 4:审核驳回 5:删除 6: 已删除
     create_date = Column(DateTime)
     modify_date = Column(DateTime)
-    status = Column(Integer)##课程状态0: 未审核；1：已审核；2：审核中 3：已修改 4:审核驳回 5:删除 6: 已删除
+    
     audit_by = Column(String(24))
     audit_note = Column(String(100))
 
