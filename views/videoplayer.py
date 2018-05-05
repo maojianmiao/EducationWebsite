@@ -227,7 +227,7 @@ def get_record():
             return '0'
 
 @page.route('/course/<int:courseid>')
-#@login_required
+@login_required
 def get_course(courseid):
     user = users.query.filter(users.email == session['email']).first() 
     
