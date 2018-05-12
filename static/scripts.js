@@ -182,14 +182,12 @@ function getXmlhttp(){
 function validateEmail(id)
 {
 
-  value = document.getElementById(id).value
-
+  value = document.getElementById(id).value 
+  var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
   if (!value){
     return "邮箱不能为空";
   }
-    apos=value.indexOf("@");
-    dotpos=value.lastIndexOf(".");
-    if (apos<1||dotpos-apos<2) 
+  if (!reg.test(value)) 
     {
       return "请输入正确的邮箱地址"
     }
