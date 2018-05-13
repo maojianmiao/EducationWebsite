@@ -984,7 +984,7 @@ td{vertical-align: top;}
 .m_btn_submit{height: 30px;width: 65px;background-color: #00806E;color: white;line-height: 30px;text-align: center;margin-left: 140px;margin-top: 10px;cursor: pointer;}
 .close{color: white;width: 25px;height: 25px;line-height: 25px;font-size:20px;text-align: center;cursor: pointer;background-color: gray;}
 .close:hover{color: red;}
-.img_display{background: url('/static/images/course160x90.png');width: 240px;height: 135px;}
+.img_display{background: url('/static/images/course160x90.png');background-size: 100% 100%;}
 .img_display img{width: 240px;height:135px;}
 .img_display video{width: 240px;height:135px;}
 .warn_note{color: red;}
